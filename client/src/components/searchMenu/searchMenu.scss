@@ -1,0 +1,49 @@
+@use '../../variables.scss' as v;
+
+.searchMenu {
+    width: 100%;
+    max-width: 1024px;
+    padding: 4px;
+    background-color: v.$secondary-color;
+    border-radius: 6px;
+    color: white;
+
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+.categoryFilter,
+.optionsFilter {
+    display: flex;
+    align-items: center;
+}
+.categoryFilter:hover,
+.optionsFilter > span:hover {
+    background-color: v.$accent-color;
+    border-radius: 4px;  
+}
+.categoryFilter {
+    padding: 10px 20px;
+    gap: 10px;
+    i {
+        font-size: 18px;
+    }
+    
+}
+.optionsFilter {
+    padding: 10px 20px;
+    span {
+        padding: 10px 20px;
+    }
+}
+@media (min-width: 768px) {
+    .searchMenu {
+        padding: 10px 30px;
+        flex-direction: row;
+        width: auto;
+        margin: auto;
+    }
+    .categoryFilter {
+        border-right: 2px solid v.$accent-color;
+    }
+}

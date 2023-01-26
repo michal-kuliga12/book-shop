@@ -1,0 +1,57 @@
+@use "../../variables.scss" as v;
+.container {
+    width: 250px;
+    padding: 10px;
+}
+.itemBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.itemImgBox {
+    img {
+        object-fit: contain;
+        height: 180px;
+    }
+}
+.itemInfoBox {
+    width: 100%;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    div{
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        .title {
+            font-size: 16px;
+            font-weight: bold;
+    
+        }
+        .details {
+            color: rgb(107, 107, 107);
+            font-size: 16px;
+            font-weight: 200;
+        }
+        
+    }
+    button {
+        height: 30px;
+        width: 100px;
+        align-self: center;
+
+        background-color: v.$accent-color;
+        color: white;
+        outline: none;
+        border: 1px solid lightgray;
+        border-radius: 4px;
+    }
+    button:hover {   
+        background-color: v.$accent-color;
+        cursor: pointer;
+    }
+}
+
