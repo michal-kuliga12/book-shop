@@ -3,17 +3,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import './searchMenu.scss'
 
-const SearchMenu = props => {
+const SearchMenu = ({setOptions, options} )=> {
   // const { dispatch } = useContext(SearchContext);
-  const options = [
+  const optionsList = [
     {
       name: "Najnowsze",
+      dbname:""
     },
     {
       name: "Rekomendowane",
+      dbName: "isFeatured"
     },
     {
       name: "Dostępne",
+      dbName: "isAvailable"
     }
   ]
   return (
@@ -23,9 +26,9 @@ const SearchMenu = props => {
           <span>KATEGORIA</span>
         </div>
         <div className='optionsFilter'>
-          {options.map((option,key)=>{
+          {optionsList.map((option,key)=>{
             return (
-              <span onClick={()=>{}}>{option.name}</span>
+              <span key={key} onClick={()=>{setOptions({...options, filter:option.dbName})}}>{option.name}</span>
             )
           })}
         </div>

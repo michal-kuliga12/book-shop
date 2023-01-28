@@ -4,12 +4,14 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider} f
 import RootLayout from './pages/RootLayout.js'
 import Home from './pages/home/home.js'
 import Login from './pages/login/login'
+import Book from './pages/book/book.js'
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
   <Route path="/" element={<RootLayout />}>
     <Route index element={<Home />} />
+    <Route path=":id" element={<Book />} />
     <Route path="/login" element={<Login />} />
   </Route>
   )

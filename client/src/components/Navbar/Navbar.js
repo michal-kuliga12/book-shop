@@ -17,7 +17,7 @@ const Navbar = () => {
             <span></span>
             <span></span>
           </span> */}
-          <Link className='navLogo' href="/">
+          <Link className='navLogo' to="/">
             <i><FontAwesomeIcon icon={faBookOpen} /></i>
             <p><span style={{color:"#FA824C"}}>Dobra</span>książka.pl</p>
           </Link>
@@ -29,14 +29,14 @@ const Navbar = () => {
             <button className='navSearchBtn' onClick={()=>{setOpenSearchBar(!openSearchBar)}}>
               <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>
             </button>
-            <div className='navLogin'>
+            <Link to="/login" className='navLogin'>
               <i><FontAwesomeIcon icon={faUser} /></i>
               <div>
                 <span>Witaj! Masz już konto?</span>
                 <span style={{fontWeight: "bold"}}>Zaloguj się</span>
               </div>
-            </div>
-            <Link className='navBasket'>
+            </Link>
+            <Link to="basket" className='navBasket'>
               <i><FontAwesomeIcon icon={faCartShopping} /></i>
               <p>Koszyk</p>
             </Link>

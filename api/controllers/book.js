@@ -42,8 +42,9 @@ export const getBook = async (req,res,next) => {
 }
 //GET ALL BOOKS
 export const getBooks = async (req,res,next) => {
+    console.log(req.query)
     try {
-        const books = await Book.find()
+        const books = await Book.find(req.query).limit(req.query.limit || 20)
         res.status(200).json(books)
     } catch {
         next(err)
