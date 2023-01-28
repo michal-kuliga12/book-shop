@@ -10,7 +10,8 @@
     justify-content: center;
     height: 80px;
     padding: 10px 20px;
-    background-color: v.$primary-color;
+    background-color: v.$primary;
+    margin-bottom: 20px;
     box-shadow: 4px 11px 18px -20px rgba(66, 68, 90, 1);
 }
 .wrapper {
@@ -35,7 +36,7 @@
 //         transition: 0.2s;
 //         width: 100%;
 //         height: 2px;
-//         background-color: v.$secondary-color;
+//         background-color: v.$secondary;
 //     }
 // }
 // .navMenuBtn_active {
@@ -84,7 +85,7 @@
         height: 50px;
     }
     input:focus {
-        background: rgb(247, 247, 247);
+        background-color: rgb(247, 247, 247);
     }
     i {
         min-width: 50px;
@@ -111,7 +112,7 @@
     top: 100px;
     left: 0;
     width: 100%;
-    background-color: v.$primary-color;
+    background-color: v.$primary;
     border-top: 1px solid lightgray;
 
     display: flex;
@@ -138,8 +139,8 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: v.$primary-color;
-    border: 1px solid v.$accent-color;
+    background: v.$primary;
+    border: 1px solid v.$orange;
     border-radius: 50%;
 
     text-decoration: none;
@@ -149,7 +150,7 @@
 .navLogin:hover,
 .navBasket:hover,
 .navSearchBtn:hover {
-    background-color: v.$accent-color;
+    background: v.$orange;
     cursor: pointer;
     i {
         color: white;

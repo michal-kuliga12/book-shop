@@ -1,39 +1,47 @@
 @use "../../variables.scss" as v;
 .container {
-    width: 250px;
+    min-width: 200px;
+    max-width: 200px;
     padding: 10px;
-}
-.itemBox {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: 1px solid rgb(233, 233, 233);
+    border-radius: 4px;
     gap: 10px;
+    transition: 0.2s;
 }
-.itemImgBox {
-    img {
-        object-fit: contain;
-        height: 180px;
-    }
+.container:hover {
+    background-color: rgb(248, 248, 248) ;
+    transition: 0.2s;
+    cursor: pointer;
+    
 }
-.itemInfoBox {
+img {
+    object-fit: contain;
+    height: 180px;
+}
+
+.itemDown {
     width: 100%;
-    height: 120px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    div{
+    gap: 6px;
+    .itemDetails{
         display: flex;
         flex-direction: column;
-        gap: 4px;
         .title {
-            font-size: 16px;
+            height: 80px;
+            font-size: 14px;
             font-weight: bold;
     
         }
         .details {
             color: rgb(107, 107, 107);
-            font-size: 16px;
+            font-size: 14px;
+            line-height: 20px;
             font-weight: 200;
         }
         
@@ -43,14 +51,14 @@
         width: 100px;
         align-self: center;
 
-        background-color: v.$accent-color;
+        background-color: v.$orange;
         color: white;
         outline: none;
         border: 1px solid lightgray;
         border-radius: 4px;
     }
     button:hover {   
-        background-color: v.$accent-color;
+        background-color: v.$orange;
         cursor: pointer;
     }
 }

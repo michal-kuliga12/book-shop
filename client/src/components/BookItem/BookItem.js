@@ -8,15 +8,15 @@ const BookItem = ({item,key}) => {
     navigate(`/${item._id}`)
   }
   return (
-    <div className='itemBox'>
-        <div className="itemImgBox">
-            <img src={item.images[0]} alt=""></img>
-        </div>
-        <div className='itemInfoBox'>
-          <div>
+    <div className='container'>
+        <img src={item.images[0]} alt=""></img>
+        <div className='itemDown'>
+          <div className='itemDetails'>
             <p className="title">{item.title}</p>
-            <p className="details">{item.author}</p>
-            <p className="details">{item.price}</p>
+            <div>
+              <p className="details">{item.author}</p>
+              <p className="details">{item.price} zł</p>
+            </div>
           </div>
           <button onClick={handleClick}>SPRAWDŹ</button>
         </div>

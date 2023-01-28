@@ -9,9 +9,14 @@ const Home = () => {
     category: " ",
     filter: " "
   })
+  let status = ""
   const {data, loading, error} = useFetch(`
-    http://localhost:5000/book?${options.filter}=true
-  `)
+    http://localhost:5000/book?${options.filter === "new"?``:`${options.filter}=true&type=${options.category}`}`,
+    "get")
+  if(data.length === 0 ) {
+    status = "noResults"
+  }
+
   return (
     <div className="home">
       {/* <section className='banner'>
@@ -25,14 +30,27 @@ const Home = () => {
         setOptions={setOptions}
       />
       <section className="productList">
-        {loading ? "loading": <>
-          {data.map((item, key)=>{
-            return (
-              <BookItem item={item} key={key}/>
-            )
-          })}
-        </>}
+        {loading 
+        ? (<p className='statusBox'>Szukanie...</p>)
+        : (
+          <>
+            {status === "noResults" 
+            ? (<p className='statusBox'>Nie znaleziono wyników dla zadanych filtrów</p>)
+            : (
+                <>
+                  {data.map((item, key)=>{
+                    return (
+                    <BookItem item={item} key={key}/>
+                    )
+                  })}
+                </>
+              )
+            }
+          </>
+          )
+        }
       </section>
+
 
     </div>
   )

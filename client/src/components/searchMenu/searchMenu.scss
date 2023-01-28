@@ -1,49 +1,89 @@
 @use '../../variables.scss' as v;
 
 .searchMenu {
+    overflow: hidden;
     width: 100%;
     max-width: 1024px;
-    padding: 4px;
-    background-color: v.$secondary-color;
-    border-radius: 6px;
+    background-color: v.$brown;
+    border-radius: 4px;
+    margin-bottom: 10px;
     color: white;
 
     display: flex;
+    flex-direction: column;
+}
+.searchMenuUp {
+    display: flex;
     flex-direction: column-reverse;
-    align-items: center;
+}
+.searchMenuDown {
+    display: none;
+}
+.searchMenuDown_active {
+    background-color: v.$brown-light;
+    width: 100%;
+    padding: 6px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    column-gap: 6px;
+    height: 340px;
+    span {
+        box-sizing: border-box;
+        padding: 4px;
+        line-height: 30px;
+        border-bottom: 1px solid v.$yellow-light;
+    }
+    span:hover {
+        background-color:v.$yellow-light;
+        cursor: pointer;
+    }
 }
 .categoryFilter,
 .optionsFilter {
+    box-sizing: border-box;
+    height: 40px;
     display: flex;
     align-items: center;
 }
-.categoryFilter:hover,
-.optionsFilter > span:hover {
-    background-color: v.$accent-color;
-    border-radius: 4px;  
-}
 .categoryFilter {
+    background-color: v.$brown-light;
     padding: 10px 20px;
+    border-bottom: 1px solid v.$yellow-light;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
     gap: 10px;
     i {
         font-size: 18px;
     }
-    
+    :hover {
+        background-color: v.$brown-dark;
+        cursor: pointer;
+    } 
 }
 .optionsFilter {
-    padding: 10px 20px;
     span {
+        box-sizing: border-box;
         padding: 10px 20px;
+        border-left: 1px solid v.$brown-light;
+    }
+    span:hover {
+        background-color: v.$brown-light;
+        cursor:pointer;  
     }
 }
 @media (min-width: 768px) {
     .searchMenu {
-        padding: 10px 30px;
-        flex-direction: row;
-        width: auto;
+        width: 95vw;
         margin: auto;
     }
-    .categoryFilter {
-        border-right: 2px solid v.$accent-color;
+    .searchMenuUp {
+        flex-direction: row;
     }
+    .searchMenuDown_active {
+        height: 250px;
+    }
+
 }
