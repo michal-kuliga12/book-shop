@@ -1,7 +1,11 @@
 @use "../../variables.scss" as v;
+// TRZEBA PRZEROBIC PLIK CSS - MEDIA QUERY JEST ZLE ZROBIONE
 .loginBg {
     position: relative;
-    background: rgba(58, 46, 15, 0.548) url('../../../public/home-bg.jpg');
+    //background: rgba(58, 46, 15, 0.548) url('../../../public/home-bg.jpg');
+    background: rgb(187,126,54);
+    background: linear-gradient(135deg, rgba(187,126,54,1) 0%, rgba(209,114,69,0) 100%);
+    background: rgba(58, 46, 15, 0.748) url('../../../public/login-bg.webp');
     background-blend-mode: darken;
     background-position: center;
     background-size: cover;
@@ -14,13 +18,15 @@
     justify-content: center;
     align-items: center;
 }
-.loginContainer {
-    width: 350px;
-    height: 600px;
+.login,
+.registerLeft {
+    border-right: 4px solid v.$orange-dark;
+    width: 400px;
+    height: 650px;
     box-shadow: 8px 8px 24px -8px rgba(66, 68, 90, 1);
     background-color: v.$primary;
-    border: 1px solid v.$secondary-light;
     padding: 20px;
+    border-right: 1px solid lightgray;
 
     display: flex;
     flex-direction: column;
@@ -53,17 +59,15 @@
         height: 50px;
         font-size: 16px;
     }
-}
-.loginTitle {
-    display: flex;
-    width: 100%;
-    border-bottom: 1px solid lightgray;
-    padding: 4px;
-    gap: 20px;   
-}
-.loginItem {
-    width: 100%;
+    form {
+        width: 100%;
+    }
+    label {
+        font-size: 16px;
+        font-weight: 500;
+    }
     input {
+        margin-block: 8px;
         width: 80%;
         height: 42px;
         outline: none;
@@ -76,27 +80,59 @@
         border: 1px solid v.$orange;
         transition: 0.4s;
     }
-    h2 {
-        font-size: 16px;
-        font-weight: 500;
-        margin-bottom: 4px;
+
+}
+.loginTitle {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+    padding: 4px;
+    gap: 20px;
+    a {
+        color: black;
+    }   
+}
+.loginRedirect {
+    span {
+        font-size: larger;
+        color: v.$orange;
     }
-
+    span:hover {
+        cursor: pointer;
+    }
 }
-.loginContainer {
-    border-right: 4px solid v.$orange-dark;
-
-}
-.registerContainer_disabled {
+.registerRight {
     border: none;
-    width: 300px;
-    height: 600px;
+    width: 400px;
+    height: 650px;
     padding: 20px;
     background: rgb(215,128,87);
     background: linear-gradient(135deg, rgba(215,128,87,1) 0%, rgba(209,114,69,1) 100%);
     color: white;
     display: flex;
     flex-direction: column;
+    gap: 10px;
+    .registerRightLogo {
+        background-color: white;
+        width: 220px;
+        height: 100px;
+        border-radius: 20px;
+        color: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        i {
+            font-size: 58px;
+        }
+        p,span {
+            display: flex;
+            flex-direction: column;
+            font-weight: bold;
+            font-family: Aboreto;
+            font-size: 22px;
+        }
+    }
     h2 {
         font-size: 32px;
         line-height: 50px;
@@ -104,7 +140,6 @@
     }
     h3 {
         margin-bottom: 24px;
-        color:#422000;
     }
     p {
         margin-bottom: 12px;
@@ -127,13 +162,18 @@
 @media (max-width:700px) {
     .loginBg {
         display: block;
+        background: none;
     }
-    .loginContainer,
-    .registerContainer_disabled {
+    .login {
+        height: 100vh;
+    }
+    .login,
+    .registerLeft,
+    .registerRight {
         width: 100%;
     }
-    .loginContainer {
+    .login,
+    .registerLeft {
         border: none;
-    }
-    
+    } 
 }

@@ -44,7 +44,7 @@
 .categoryFilter,
 .optionsFilter {
     box-sizing: border-box;
-    height: 40px;
+    height: 60px;
     display: flex;
     align-items: center;
 }
@@ -58,20 +58,32 @@
     i {
         font-size: 18px;
     }
-    :hover {
-        background-color: v.$brown-dark;
-        cursor: pointer;
-    } 
 }
+.categoryFilter:hover {
+    background-color: v.$yellow-light;
+    cursor: pointer;
+} 
 .optionsFilter {
+    width: 100%;
+    justify-content: space-between;
     span {
+        line-height: 60px;
         box-sizing: border-box;
-        padding: 10px 20px;
+        padding: 0 20px;
+
         border-left: 1px solid v.$brown-light;
     }
     span:hover {
         background-color: v.$brown-light;
         cursor:pointer;  
+    }
+    .optionsL {
+        display: flex;
+        align-items: center;
+    }
+    .optionsR {
+        width: 200px;
+        text-align: center;
     }
 }
 @media (min-width: 768px) {

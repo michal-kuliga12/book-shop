@@ -21,10 +21,10 @@ const Navbar = () => {
             <i><FontAwesomeIcon icon={faBookOpen} /></i>
             <p><span style={{color:"#FA824C"}}>Dobra</span>książka.pl</p>
           </Link>
-          <span className={openSearchBar?'navSearch_active':'navSearch'}>
+          {/* <span className={openSearchBar?'navSearch_active':'navSearch'}>
               <input type="text" />
               <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>
-          </span>
+          </span> */}
           <div className="navRight">
             <button className='navSearchBtn' onClick={()=>{setOpenSearchBar(!openSearchBar)}}>
               <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>

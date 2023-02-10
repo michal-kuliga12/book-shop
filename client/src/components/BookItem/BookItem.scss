@@ -11,6 +11,16 @@
     border-radius: 4px;
     gap: 10px;
     transition: 0.2s;
+    animation: fadein 0.5s;
+    -webkit-animation: fadein 0.5s;
+    -moz-animation: fadein 0.5s;
+    -o-animation: fadein 0.5s;
+    -ms-animation: fadein 0.5s;
+
+    @keyframes fadein {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+    }
 }
 .container:hover {
     background-color: rgb(248, 248, 248) ;
@@ -18,11 +28,6 @@
     cursor: pointer;
     
 }
-img {
-    object-fit: contain;
-    height: 180px;
-}
-
 .itemDown {
     width: 100%;
     display: flex;

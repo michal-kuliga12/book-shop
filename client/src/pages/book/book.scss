@@ -1,0 +1,89 @@
+@use '../../variables.scss' as v;
+
+.bookWrapper {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+.bookContainer {
+    max-width: 1024px;
+    border: 1px solid lightgray;
+    // background-color: v.$primary;
+    background-color: white;
+    border-radius: 10px;
+    width: 100%;
+    padding: 10px;
+    gap: 40px;
+    display: flex;
+    flex-direction: column;
+    .bookImgAndDetails {
+        display: flex;
+        gap: 20px;
+        flex-direction: column;
+    }
+    img {
+        margin-bottom: 10px;
+        margin: auto;
+    }
+    .bookRight {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    h1 {
+        font-size: 24px;
+        margin-bottom: 4px;
+    }
+    p {
+        font-size: 18px;
+    }
+    .tagContainer {
+        display: flex;
+        gap: 4px;
+        .tagItem {
+            display: flex;
+            gap: 4px;
+            padding: 4px 10px;
+            border: 1px solid lightgray;
+            border-radius: 4px;
+    
+        }
+    }
+    .bookDetails {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        p {
+            display: flex;
+            gap: 16px;
+            font-size: 16px;
+            color: rgb(63, 63, 63);
+            span {
+                min-width: 100px;
+            }
+        }
+    }
+    .bookDesc {
+        border-top: 1px solid lightgray;
+        padding: 10px;
+        h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 16px;
+        }
+    }
+}
+@media (min-width: 768px) {
+    .bookContainer {
+        padding: 20px;
+        .bookImgAndDetails {
+            flex-direction: row;
+        }
+        img {
+            margin: 0;
+        }
+    }
+
+}

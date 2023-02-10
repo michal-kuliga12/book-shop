@@ -93,11 +93,14 @@ const SearchMenu = ({setOptions, options} )=> {
             <span>KATEGORIA</span>
           </div>
           <div className='optionsFilter'>
-            {optionsList.map((option,key)=>{
-              return (
-                <span key={key} onClick={()=>{setOptions({...options, filter:option.dbName})}}>{option.name}</span>
-              )
-            })}
+            <div className='optionsL'>
+              {optionsList.map((option,key)=>{
+                return (
+                  <span key={key} onClick={()=>{setOptions({...options, filter:option.dbName})}}>{option.name}</span>
+                )
+              })}
+            </div>
+            <span className='optionsR' onClick={()=>{setOptions({category:"", filter:""})}}>Resetuj filtry</span>
           </div>
         </div>
         <div className={toggleCategory?"searchMenuDown_active":"searchMenuDown"}>

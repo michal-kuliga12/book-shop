@@ -7,11 +7,11 @@ const RootLayout = () => {
   let location = useLocation()
   return (
     <div>
-      {location.pathname !== "/login" && <Navbar />}
+      {location.pathname !== ("/login"||"/register") && <Navbar />}
         <main>
           <Outlet />
         </main>
-        {location.pathname !== "/login" && <Footer />}
+        {location.pathname !== ("/login"||"/register") && <Footer />}
     </div>
   )
 }

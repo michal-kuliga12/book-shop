@@ -8,8 +8,8 @@ const BookItem = ({item,key}) => {
     navigate(`/${item._id}`)
   }
   return (
-    <div className='container'>
-        <img src={item.images[0]} alt=""></img>
+    <>
+        <img width={120} height={180} src={item.images[0]} alt=""></img>
         <div className='itemDown'>
           <div className='itemDetails'>
             <p className="title">{item.title}</p>
@@ -20,7 +20,7 @@ const BookItem = ({item,key}) => {
           </div>
           <button onClick={handleClick}>SPRAWDŹ</button>
         </div>
-    </div>
+    </>
   )
 }
 
