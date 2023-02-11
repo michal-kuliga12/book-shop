@@ -63,6 +63,35 @@
             }
         }
     }
+    .bookButtons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 16px;
+        button {
+            width: 200px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+
+            background-color: white;
+            border: 1px solid lightgray;
+            border-radius: 4px;
+            i {
+                font-size: 22px;
+            }
+        }
+        .addToFavBtn {
+        }
+        .addToBasketBtn {
+            background-color: v.$orange;
+            color: white;
+            border: none;
+
+        }
+    }
     .bookDesc {
         border-top: 1px solid lightgray;
         padding: 10px;
@@ -80,9 +109,20 @@
         padding: 20px;
         .bookImgAndDetails {
             flex-direction: row;
+            justify-content: space-between;
         }
         img {
             margin: 0;
+        }
+    }
+    .bookButtons {
+        flex-direction: column;
+        align-items: end;
+        width: 20vw;
+        button {
+            justify-content: flex-start!important;
+            min-width: 100%;
+            padding: 0 10px;
         }
     }
 

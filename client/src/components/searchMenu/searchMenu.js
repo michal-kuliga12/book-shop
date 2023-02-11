@@ -1,119 +1,148 @@
-import { faBars} from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useState } from 'react'
-import './searchMenu.scss'
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
+import "./SearchMenu.scss";
 
-const SearchMenu = ({setOptions, options} )=> {
-  const [toggleCategory, setToggleCategory] = useState(false)
+const SearchMenu = ({ setOptions, options }) => {
+  const [toggleCategory, setToggleCategory] = useState(false);
   const optionsList = [
     {
       name: "Najnowsze",
-      dbName:"new"
+      dbName: "new",
     },
     {
       name: "Rekomendowane",
-      dbName: "isFeatured"
+      dbName: "isFeatured",
     },
     {
       name: "Dostępne",
-      dbName: "isAvailable"
-    }
-  ]
+      dbName: "isAvailable",
+    },
+  ];
   const categoryList = [
     {
       name: "Audiobooki",
-      dbName:"audiobook"
+      dbName: "audiobook",
     },
     {
       name: "eBooki",
-      dbName: "ebook"
+      dbName: "ebook",
     },
     {
       name: "Biografie",
-      dbName: "biography"
+      dbName: "biography",
     },
     {
       name: "Fantastyka",
-      dbName: "fantasy"
+      dbName: "fantasy",
     },
     {
       name: "Historia",
-      dbName: "history"
+      dbName: "history",
     },
     {
       name: "Kryminał i sensacja",
-      dbName: "thriller"
+      dbName: "thriller",
     },
     {
       name: "Komiksy",
-      dbName: "comic"
+      dbName: "comic",
     },
     {
       name: "Biznes",
-      dbName: "business"
+      dbName: "business",
     },
     {
       name: "Sport",
-      dbName: "sport"
+      dbName: "sport",
     },
     {
       name: "Dla dzieci",
-      dbName:"kids"
+      dbName: "kids",
     },
     {
       name: "Dla młodzieży",
-      dbName: "teen"
+      dbName: "teen",
     },
     {
       name: "Kuchnia i diety",
-      dbName:"kitchen"
+      dbName: "kitchen",
     },
     {
       name: "Kultura i sztuka",
-      dbName:"culture"
+      dbName: "culture",
     },
     {
       name: "Lektury szkolne",
-      dbName:"lectures"
+      dbName: "lectures",
     },
     {
       name: "Literatura obyczajowa",
-      dbName:"custom literature"
+      dbName: "custom literature",
     },
     {
       name: "Nauka języków",
-      dbName:"languages"
+      dbName: "languages",
     },
-  ]
+  ];
   return (
-    <section className='searchMenu'>
-        <div className='searchMenuUp'>
-          <div className='categoryFilter' onClick={()=>{setToggleCategory(!toggleCategory)}}>
-            <i><FontAwesomeIcon icon={faBars} /></i>
-            <span>KATEGORIA</span>
-          </div>
-          <div className='optionsFilter'>
-            <div className='optionsL'>
-              {optionsList.map((option,key)=>{
-                return (
-                  <span key={key} onClick={()=>{setOptions({...options, filter:option.dbName})}}>{option.name}</span>
-                )
-              })}
-            </div>
-            <span className='optionsR' onClick={()=>{setOptions({category:"", filter:""})}}>Resetuj filtry</span>
-          </div>
+    <section className="searchMenu">
+      <div className="searchMenuUp">
+        <div
+          className="categoryFilter"
+          onClick={() => {
+            setToggleCategory(!toggleCategory);
+          }}
+        >
+          <i>
+            <FontAwesomeIcon icon={faBars} />
+          </i>
+          <span>KATEGORIA</span>
         </div>
-        <div className={toggleCategory?"searchMenuDown_active":"searchMenuDown"}>
-            {categoryList.map((category,key)=>{
-              return(
-                <span key={key} onClick={()=>{
-                  setOptions({...options, category:category.dbName})
-                  console.log(options)}}>{category.name}</span>
-              )
+        <div className="optionsFilter">
+          <div className="optionsL">
+            {optionsList.map((option, key) => {
+              return (
+                <span
+                  key={key}
+                  onClick={() => {
+                    setOptions({ ...options, filter: option.dbName });
+                  }}
+                >
+                  {option.name}
+                </span>
+              );
             })}
+          </div>
+          <span
+            className="optionsR"
+            onClick={() => {
+              setOptions({ category: "", filter: "" });
+            }}
+          >
+            Resetuj filtry
+          </span>
         </div>
+      </div>
+      <div
+        className={toggleCategory ? "searchMenuDown_active" : "searchMenuDown"}
+      >
+        {categoryList.map((category, key) => {
+          return (
+            <span
+              key={key}
+              onClick={() => {
+                setOptions({ ...options, category: category.dbName });
+                console.log(options);
+              }}
+            >
+              {category.name}
+            </span>
+          );
+        })}
+      </div>
     </section>
-  )
-}
+  );
+};
 
-export default SearchMenu
+export default SearchMenu;

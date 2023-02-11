@@ -1,5 +1,6 @@
 @use '../../variables.scss' as v;
 .home {
+    padding-bottom: 120px;
     background-color: v.$primary;
     display: flex;
     align-items: flex-start;

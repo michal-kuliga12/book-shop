@@ -26,11 +26,16 @@ const useFetch = (url, method, body) => {
   const reFetch = async () => {
     setLoading(true);
     try {
-      const res = await axios({
-        method: method,
-        url: url,
-        data: body,
-      });
+      const res = await axios(
+        {
+          method: method,
+          url: url,
+          data: body,
+        },
+        {
+          withCredentials: true,
+        }
+      );
       setData(res);
     } catch (err) {
       setError(err);

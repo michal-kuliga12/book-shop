@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./login.scss";
+import "./Login.scss";
 
 const Login = () => {
   const [status, setStatus] = useState("typing");
@@ -23,7 +23,8 @@ const Login = () => {
     try {
       const res = await axios.post(
         "http://localhost:5000/auth/login",
-        userData
+        userData,
+        { withCredentials: true }
       );
       setStatus("success");
     } catch (err) {

@@ -27,6 +27,7 @@ export const updateBook = async (req, res, next) => {
 // DELETE BOOK
 export const deleteBook = async (req, res, next) => {
   const id = req.params.id;
+  console.log(req.userId);
   try {
     const deletedBook = await Book.findByIdAndDelete(id);
     res.status(200).json(deletedBook);
