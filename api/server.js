@@ -6,6 +6,7 @@ import authRoute from "./routes/auth.js";
 import userRoute from "./routes/user.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import verifyToken from "./middlewares/verifyToken.js";
 
 const app = express();
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
@@ -28,9 +29,10 @@ mongoose.connection.on("disconnected", () => {
 });
 
 //routes
+
 app.use("/book", bookRoute);
 app.use("/auth", authRoute);
-app.use("/user", userRoute);
+app.use("/user", verifyToken, userRoute);
 
 app.use((err, req, res, next) => {
   const errStatus = err.status || 500;

@@ -6,16 +6,16 @@ import generateToken from "../util/GenerateToken.js";
 import Token from "../models/Token.js";
 
 export const register = async (req, res, next) => {
-  const { username, password, email } = await req.body;
+  const { username, password, email } = req.body;
   const saltRounds = 10;
   try {
     const foundUser = await User.findOne({ username: username, email: email });
-    if (foundUser) return next(createError(409, "user already exists"));
+    if (foundUser) return res.status(409).send("user already exists");
     bcrypt.hash(password, saltRounds, async function (err, hash) {
       const newUser = new User({ username, password: hash, email });
       const user = await newUser.save();
+      res.status(200).json(user);
     });
-    res.status(200).json(user);
   } catch (err) {
     return next(err);
   }
@@ -49,7 +49,7 @@ export const login = async (req, res, next) => {
     });
     res
       .cookie("access_token", access_token, {
-        maxAge: 60000,
+        maxAge: 600000,
         httpOnly: true,
         secure: process.env.ACCESS_TOKEN === "production",
       })

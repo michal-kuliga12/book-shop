@@ -6,10 +6,11 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.scss";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [status, setStatus] = useState("typing");
   const [action, setAction] = useState(0);
   const [userData, setUserData] = useState({
@@ -27,6 +28,9 @@ const Login = () => {
         { withCredentials: true }
       );
       setStatus("success");
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
     } catch (err) {
       setStatus("error");
     }
@@ -39,6 +43,7 @@ const Login = () => {
     }
     if (!(userData.username && userData.email && userData.password)) {
       setStatus("bracketsError");
+      return;
     }
     try {
       const res = await axios.post(
@@ -46,8 +51,10 @@ const Login = () => {
         userData
       );
       setStatus("success");
+      handleSubmit();
     } catch {
       setStatus("error");
+      return;
     }
   };
   return (
@@ -192,7 +199,7 @@ const Login = () => {
                       Należy uzupełnić wszystkie pola!
                     </p>
                   )) ||
-                  (status === "success" && "Pomyślnie zalogowano!")}
+                  (status === "success" && "Rejestracja przebiegła pomyślnie!")}
               </span>
               <button
                 disabled={status === "loading"}

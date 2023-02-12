@@ -5,6 +5,8 @@ import "./SearchMenu.scss";
 
 const SearchMenu = ({ setOptions, options }) => {
   const [toggleCategory, setToggleCategory] = useState(false);
+  // const [loggedUser, setLoggedUser] = useState(locals.user);
+
   const optionsList = [
     {
       name: "Najnowsze",

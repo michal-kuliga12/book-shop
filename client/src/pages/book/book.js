@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../book/Book.scss";
 import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
@@ -11,6 +11,7 @@ import {
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import axios from "axios";
 
 const Book = () => {
   const [like, setLike] = useState(false);
@@ -19,6 +20,22 @@ const Book = () => {
     `http://192.168.0.147:5000/book/find/${id}`,
     "get"
   );
+
+  const handleEditFavorite = async () => {
+    try {
+      if (!like) {
+        const res = await axios.post(`http://localhost:5000/book/fav/${id}`);
+        console.log(res);
+        return;
+      } else {
+        const res = await axios.delete(`http://localhost:5000/book/fav/${id}`);
+        console.log(res);
+        return;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div
@@ -83,6 +100,7 @@ const Book = () => {
               <button
                 onClick={() => {
                   setLike(!like);
+                  handleEditFavorite();
                 }}
                 className="addToFavBtn"
                 style={

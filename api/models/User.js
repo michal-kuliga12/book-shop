@@ -20,13 +20,13 @@ const userSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  favBooks: {
+  favorites: {
     type: [{}],
   },
-  booksInBasket: {
+  basket: {
     type: [{}],
   },
-  orderedBooks: {
+  orders: {
     type: [{}],
   },
 });
