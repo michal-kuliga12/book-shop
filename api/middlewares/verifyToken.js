@@ -10,7 +10,6 @@ const verifyToken = async (req, res, next) => {
   try {
     const data = jwt.verify(token, process.env.ACCESS_TOKEN);
     const user = await User.findById(data.id);
-    res.locals.user = user;
     req.userId = data.id;
     req.userIsAdmin = data.isAdmin;
     return next();

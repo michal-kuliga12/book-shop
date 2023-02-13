@@ -1,9 +1,10 @@
 import BookItem from "../../components/BookItem/BookItem.js";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import "./Home.scss";
 import "../../components/BookItem/BookItem.scss";
 import SearchMenu from "../../components/searchMenu/SearchMenu.js";
+import { UserContext } from "../../context/userContext.js";
 
 const Home = () => {
   const [options, setOptions] = useState({

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../book/Book.scss";
 import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
@@ -12,8 +12,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
+import { UserContext } from "../../context/userContext";
 
 const Book = () => {
+  const userContext = useContext(UserContext);
+  console.log(userContext.isLogged);
+  console.log(userContext.user);
   const [like, setLike] = useState(false);
   const id = useParams().id;
   const { data, loading, error } = useFetch(
@@ -96,40 +100,49 @@ const Book = () => {
                 </p>
               </div>
             </div>
-            <div className="bookButtons">
-              <button
-                onClick={() => {
-                  setLike(!like);
-                  handleEditFavorite();
-                }}
-                className="addToFavBtn"
-                style={
-                  like ? { borderColor: "red" } : { borderColor: "lightgray" }
-                }
-              >
-                {like ? (
-                  <>
-                    <i style={{ color: "red" }}>
-                      <FontAwesomeIcon icon={faHeartSolid} />
-                    </i>
-                    <span>Dodano do ulubionych</span>
-                  </>
-                ) : (
-                  <>
-                    <i>
-                      <FontAwesomeIcon icon={faHeart} />
-                    </i>
-                    <span>Dodaj do ulubionych</span>
-                  </>
-                )}
-              </button>
-              <button className="addToBasketBtn">
-                <i>
-                  <FontAwesomeIcon icon={faShoppingBasket} />
-                </i>
-                <span>Dodaj do koszyka</span>
-              </button>
-            </div>
+            {userContext.isLogged ? (
+              <div className="bookButtons">
+                <button
+                  onClick={() => {
+                    setLike(!like);
+                    handleEditFavorite();
+                  }}
+                  className="addToFavBtn"
+                  style={
+                    like ? { borderColor: "red" } : { borderColor: "lightgray" }
+                  }
+                >
+                  {like ? (
+                    <>
+                      <i style={{ color: "red" }}>
+                        <FontAwesomeIcon icon={faHeartSolid} />
+                      </i>
+                      <span>Dodano do ulubionych</span>
+                    </>
+                  ) : (
+                    <>
+                      <i>
+                        <FontAwesomeIcon icon={faHeart} />
+                      </i>
+                      <span>Dodaj do ulubionych</span>
+                    </>
+                  )}
+                </button>
+                <button className="addToBasketBtn">
+                  <i>
+                    <FontAwesomeIcon icon={faShoppingBasket} />
+                  </i>
+                  <span>Dodaj do koszyka</span>
+                </button>
+              </div>
+            ) : (
+              <div className="bookButtons_disabled">
+                <p>
+                  Aby uzyskać dostęp do listy ulubionych, oraz tworzenia
+                  zamówień zaloguj się
+                </p>
+              </div>
+            )}
           </div>
           <div className="bookDesc">
             <h2>Opis:</h2>

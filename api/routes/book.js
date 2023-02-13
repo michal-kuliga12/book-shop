@@ -1,7 +1,9 @@
 import express from "express";
 import {
   addBook,
+  addBookToBasket,
   addBookToFav,
+  delBookFromBasket,
   delBookFromFav,
   deleteBook,
   getBook,
@@ -19,10 +21,11 @@ router.delete("/:id", verifyAdmin, deleteBook);
 
 router.get("/find/:id", getBook);
 router.get("/", getBooks);
-
+//FAVORITE LIST
 router.post("/fav/:id", verifyToken, addBookToFav);
 router.delete("/fav/:id", verifyToken, delBookFromFav);
+//BASKET
+router.post("/basket/:id", verifyToken, addBookToBasket);
+router.delete("/basket/:id", verifyToken, delBookFromBasket);
 
-// router.post("/basket/:id", addBookToBasket);
-// router.delete("/basket/:id", delBookFromBasket);
 export default router;

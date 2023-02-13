@@ -10,10 +10,18 @@ import RootLayout from "./pages/RootLayout.js";
 import Home from "./pages/home/Home.js";
 import Login from "./pages/login/Login";
 import Book from "./pages/book/Book.js";
+import { UserContextProvider } from "./context/userContext.js";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<RootLayout />}>
+    <Route
+      path="/"
+      element={
+        <UserContextProvider>
+          <RootLayout />
+        </UserContextProvider>
+      }
+    >
       <Route index element={<Home />} />
       <Route path=":id" element={<Book />} />
       <Route path="/login" element={<Login />} />

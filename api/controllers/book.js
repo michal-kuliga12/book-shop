@@ -1,5 +1,6 @@
 import Book from "../models/Book.js";
 import User from "../models/User.js";
+import createError from "../util/Error.js";
 
 // ADD BOOK
 export const addBook = async (req, res, next) => {
@@ -41,6 +42,9 @@ export const getBook = async (req, res, next) => {
   const id = req.params.id;
   try {
     const book = await Book.findOne({ _id: id });
+
+    console.log(book);
+
     res.status(200).json(book);
   } catch (err) {
     next(err);
@@ -60,14 +64,11 @@ export const getBooks = async (req, res, next) => {
 export const addBookToFav = async (req, res, next) => {
   const bookId = req.params.id;
   console.log(bookId);
-  console.log(req.userId);
   try {
     const book = await Book.findById(bookId);
-    console.log(book);
     const user = await User.findByIdAndUpdate(req.userId, {
       $push: { favorites: book },
     });
-    console.log(user);
     res.status(200).json(user.favorites);
   } catch (err) {
     next(err);
@@ -75,18 +76,45 @@ export const addBookToFav = async (req, res, next) => {
 };
 export const delBookFromFav = async (req, res, next) => {
   const bookId = req.params.id;
-  console.log(bookId);
   try {
-    const result = await User.findOneAndUpdate(
-      { _id: req.userId },
-      {
-        $pull: {
-          favorites: { _id: "63cc38d7f1dbce27e657dfc0 " },
-        },
-      },
-      { safe: true, multi: false }
-    );
-    return res.status(200).json(result);
+    const foundBook = await Book.findById(bookId);
+    const foundUser = await User.findById(req.userId);
+    if (!foundBook || !foundUser)
+      next(createError(404, "User or book not found"));
+    foundUser.favorites.pull(foundBook);
+    await foundUser.save();
+    return res.status(200).json(foundUser.favorites);
+  } catch (err) {
+    next(err);
+  }
+};
+//BASKET
+export const addBookToBasket = async (req, res, next) => {
+  const bookId = req.params.id;
+  console.log(bookId);
+  console.log(req.userId);
+  try {
+    const book = await Book.findById(bookId);
+    console.log(book);
+    const user = await User.findByIdAndUpdate(req.userId, {
+      $push: { basket: book },
+    });
+    console.log(user);
+    res.status(200).json(user.basket);
+  } catch (err) {
+    next(err);
+  }
+};
+export const delBookFromBasket = async (req, res, next) => {
+  const bookId = req.params.id;
+  try {
+    const foundBook = await Book.findById(bookId);
+    const foundUser = await User.findById(req.userId);
+    if (!foundBook || !foundUser)
+      next(createError(404, "User or book not found"));
+    foundUser.basket.pull(foundBook);
+    await foundUser.save();
+    return res.status(200).json(foundUser.basket);
   } catch (err) {
     next(err);
   }

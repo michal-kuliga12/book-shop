@@ -1,6 +1,7 @@
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../../context/userContext";
 import "./SearchMenu.scss";
 
 const SearchMenu = ({ setOptions, options }) => {

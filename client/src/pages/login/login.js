@@ -5,11 +5,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/userContext";
 import "./Login.scss";
 
 const Login = () => {
+  const userContext = useContext(UserContext);
   const navigate = useNavigate();
   const [status, setStatus] = useState("typing");
   const [action, setAction] = useState(0);
@@ -28,6 +30,12 @@ const Login = () => {
         { withCredentials: true }
       );
       setStatus("success");
+      userContext.dispatch({
+        type: "LOGIN",
+        user: userData.username,
+        isLogged: true,
+      });
+      console.log(userContext.user);
       setTimeout(() => {
         navigate("/");
       }, 1000);
