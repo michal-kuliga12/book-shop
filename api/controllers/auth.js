@@ -97,3 +97,17 @@ export const logout = async (req, res, next) => {
     .json({ db_token })
     .end();
 };
+
+export const checkToken = async (req, res) => {
+  const token = req.cookies.access_token;
+  if (!token) {
+    return res.status(401).json({ user: null });
+  }
+  try {
+    const data = jwt.verify(token, process.env.ACCESS_TOKEN);
+    const user = await User.findById(data.id);
+    return res.status(200).json({ user: user.username });
+  } catch (err) {
+    return res.status(401).json({ user: null });
+  }
+};

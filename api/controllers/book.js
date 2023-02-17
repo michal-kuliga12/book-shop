@@ -1,6 +1,7 @@
 import Book from "../models/Book.js";
 import User from "../models/User.js";
 import createError from "../util/Error.js";
+import mongoose from "mongoose";
 
 // ADD BOOK
 export const addBook = async (req, res, next) => {
@@ -29,7 +30,6 @@ export const updateBook = async (req, res, next) => {
 // DELETE BOOK
 export const deleteBook = async (req, res, next) => {
   const id = req.params.id;
-  console.log(req.userId);
   try {
     const deletedBook = await Book.findByIdAndDelete(id);
     res.status(200).json(deletedBook);
@@ -42,9 +42,6 @@ export const getBook = async (req, res, next) => {
   const id = req.params.id;
   try {
     const book = await Book.findOne({ _id: id });
-
-    console.log(book);
-
     res.status(200).json(book);
   } catch (err) {
     next(err);
@@ -52,7 +49,6 @@ export const getBook = async (req, res, next) => {
 };
 //GET ALL BOOKS
 export const getBooks = async (req, res, next) => {
-  console.log(req.query);
   try {
     const books = await Book.find(req.query).limit(req.query.limit || 40);
     res.status(200).json(books);
@@ -61,9 +57,26 @@ export const getBooks = async (req, res, next) => {
   }
 };
 //FAVORITE LIST
+export const checkBookInFav = async (req, res, next) => {
+  const bookId = req.params.id;
+  try {
+    let favBook = await User.find(
+      { _id: req.userId },
+      {
+        favorites: { $elemMatch: { _id: mongoose.Types.ObjectId(bookId) } },
+      }
+    );
+    favBook = favBook[0].favorites;
+    if (favBook.length === 0) {
+      return res.status(204).json({ favBook });
+    }
+    res.status(200).json({ favBook });
+  } catch (err) {
+    next(err);
+  }
+};
 export const addBookToFav = async (req, res, next) => {
   const bookId = req.params.id;
-  console.log(bookId);
   try {
     const book = await Book.findById(bookId);
     const user = await User.findByIdAndUpdate(req.userId, {
@@ -89,17 +102,21 @@ export const delBookFromFav = async (req, res, next) => {
   }
 };
 //BASKET
+export const getBasket = async (req, res, next) => {
+  try {
+    const foundUser = await User.findById(req.userId);
+    res.status(200).json(foundUser.basket);
+  } catch (err) {
+    next(err);
+  }
+};
 export const addBookToBasket = async (req, res, next) => {
   const bookId = req.params.id;
-  console.log(bookId);
-  console.log(req.userId);
   try {
     const book = await Book.findById(bookId);
-    console.log(book);
     const user = await User.findByIdAndUpdate(req.userId, {
       $push: { basket: book },
     });
-    console.log(user);
     res.status(200).json(user.basket);
   } catch (err) {
     next(err);

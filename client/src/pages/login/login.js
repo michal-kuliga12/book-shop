@@ -21,7 +21,7 @@ const Login = () => {
     password: "",
     rePassword: "",
   });
-  const handleSubmit = async () => {
+  const handleLogin = async () => {
     setStatus("loading");
     try {
       const res = await axios.post(
@@ -35,7 +35,6 @@ const Login = () => {
         user: userData.username,
         isLogged: true,
       });
-      console.log(userContext.user);
       setTimeout(() => {
         navigate("/");
       }, 1000);
@@ -59,7 +58,7 @@ const Login = () => {
         userData
       );
       setStatus("success");
-      handleSubmit();
+      handleLogin();
     } catch {
       setStatus("error");
       return;
@@ -121,7 +120,7 @@ const Login = () => {
               <button
                 disabled={status === "loading"}
                 onClick={() => {
-                  handleSubmit();
+                  handleLogin();
                 }}
               >
                 Zaloguj się

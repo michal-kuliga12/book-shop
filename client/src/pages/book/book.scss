@@ -1,9 +1,11 @@
 @use '../../variables.scss' as v;
 
 .bookWrapper {
+    padding-top: 100px;
     display: flex;
     justify-content: center;
     padding: 10px;
+
 }
 .bookContainer {
     max-width: 1024px;
@@ -16,6 +18,17 @@
     gap: 40px;
     display: flex;
     flex-direction: column;
+    transition: 0.2s;
+    animation: fadein 0.5s;
+    -webkit-animation: fadein 0.5s;
+    -moz-animation: fadein 0.5s;
+    -o-animation: fadein 0.5s;
+    -ms-animation: fadein 0.5s;
+    
+    @keyframes fadein {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+    }
     .bookImgAndDetails {
         display: flex;
         gap: 20px;
@@ -26,9 +39,10 @@
         margin: auto;
     }
     .bookRight {
+        flex-basis: 100%;
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 30px;
     }
     h1 {
         font-size: 24px;
@@ -36,6 +50,11 @@
     }
     p {
         font-size: 18px;
+    }
+    .bookDetails {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
     }
     .tagContainer {
         display: flex;
@@ -49,7 +68,7 @@
     
         }
     }
-    .bookDetails {
+    .bookInfo {
         display: flex;
         flex-direction: column;
         gap: 4px;
@@ -57,7 +76,7 @@
             display: flex;
             gap: 16px;
             font-size: 16px;
-            color: rgb(63, 63, 63);
+            color: rgb(78, 78, 78);
             span {
                 min-width: 100px;
             }
@@ -68,13 +87,13 @@
         justify-content: flex-end;
         gap: 16px;
         button {
-            width: 200px;
+            width: 250px;
             height: 40px;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 10px;
-            font-size: 16px;
+            font-size: 14px;
 
             background-color: white;
             border: 1px solid lightgray;
@@ -82,6 +101,9 @@
             i {
                 font-size: 22px;
             }
+        }
+        button:hover {
+            cursor: pointer;
         }
         .addToFavBtn {
         }
@@ -91,6 +113,16 @@
             border: none;
 
         }
+    }
+    .bookButtons_disabled {
+        display: flex;
+        p {
+            font-size: 16px;
+            background-color: rgb(255, 245, 190);
+            border-radius: 6px;
+            padding: 10px;
+        }
+        
     }
     .bookDesc {
         border-top: 1px solid lightgray;
@@ -109,19 +141,24 @@
         padding: 20px;
         .bookImgAndDetails {
             flex-direction: row;
-            justify-content: space-between;
+            gap: 40px;
         }
         img {
             margin: 0;
         }
     }
+    .bookButtons_disabled {
+        justify-content: flex-end;
+        p {
+            width: 240px;
+        }
+    }
     .bookButtons {
         flex-direction: column;
-        align-items: end;
-        width: 20vw;
+        align-items: flex-end;
         button {
+            font-size: 16px;
             justify-content: flex-start!important;
-            min-width: 100%;
             padding: 0 10px;
         }
     }

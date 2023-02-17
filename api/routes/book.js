@@ -3,9 +3,11 @@ import {
   addBook,
   addBookToBasket,
   addBookToFav,
+  checkBookInFav,
   delBookFromBasket,
   delBookFromFav,
   deleteBook,
+  getBasket,
   getBook,
   getBooks,
   updateBook,
@@ -21,10 +23,12 @@ router.delete("/:id", verifyAdmin, deleteBook);
 
 router.get("/find/:id", getBook);
 router.get("/", getBooks);
+router.get("/findFav/:id", verifyToken, checkBookInFav);
 //FAVORITE LIST
 router.post("/fav/:id", verifyToken, addBookToFav);
 router.delete("/fav/:id", verifyToken, delBookFromFav);
 //BASKET
+router.get("/basket", verifyToken, getBasket);
 router.post("/basket/:id", verifyToken, addBookToBasket);
 router.delete("/basket/:id", verifyToken, delBookFromBasket);
 

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useReducer } from "react";
 import { Outlet } from "react-router-dom";
 
@@ -17,6 +18,8 @@ const UserReducer = (state, action) => {
       };
     case "LOGOUT":
       return INITIAL_STATE;
+    case "TOKEN_CHECK":
+      return { user: action.user, isLogged: action.isLogged };
     default:
       return state;
   }
@@ -24,7 +27,6 @@ const UserReducer = (state, action) => {
 
 export const UserContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(UserReducer, INITIAL_STATE);
-
   return (
     <UserContext.Provider
       value={{

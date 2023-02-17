@@ -1,0 +1,47 @@
+@use "../../variables.scss" as v;
+.stepperWrapper {
+    width: 100%;
+    padding-inline: 20px;
+    display: flex;
+    justify-content: flex-start;
+    font-size: 24px;
+}
+.stepperItem {
+    position: relative;
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+.stepperItem::after,
+.stepperItem.active::after {
+    content: "";
+    position: absolute;
+    top: -26px;
+    left: 30px;
+    border-bottom: 4px solid v.$orange; //zmienic do interaktywnosci 
+    border-radius: 4px;
+    width: 400px;
+    height: 60px;
+    z-index: 2;
+}
+.stepperItem.active{
+    border-bottom: 4px solid v.$orange;
+}
+.stepCounter {
+    font-family: 'Lato', sans-serif;
+    position: relative;
+    line-height: 50px;
+    text-align: center;
+    background-color: v.$orange; //zmienic do interaktywnosci
+    min-width: 50px;
+    min-height: 50px;
+    border-radius: 50%;
+}
+.stepName {
+    width: 300px;
+    font-family: 'Lato', sans-serif;
+    font-size: 26px;
+    align-self: flex-start;
+}

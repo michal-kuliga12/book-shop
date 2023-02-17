@@ -12,7 +12,6 @@ import "./Navbar.scss";
 
 const Navbar = () => {
   const userContext = useContext(UserContext);
-  console.log(userContext.user);
   const [openMenu, setOpenMenu] = useState(false);
   const [openSearchBar, setOpenSearchBar] = useState(false);
   return (
@@ -59,7 +58,7 @@ const Navbar = () => {
               </div>
             )}
           </Link>
-          <Link to="basket" className="navBasket">
+          <Link to="/cart" className="navBasket">
             <i>
               <FontAwesomeIcon icon={faCartShopping} />
             </i>
