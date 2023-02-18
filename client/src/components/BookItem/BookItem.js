@@ -1,27 +1,37 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import "./BookItem.scss"
+import axios from "axios";
+import React from "react";
+import { Link } from "react-router-dom";
+import "./BookItem.scss";
 
-const BookItem = ({item,key}) => {
-  const navigate = useNavigate();
-  const handleClick = () => {
-    navigate(`/${item._id}`)
-  }
+const BookItem = ({ item, key }) => {
+  const handleEditBasket = async () => {
+    try {
+      const res = await axios.post(
+        `http://localhost:5000/book/basket/${item._id}`
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <>
-        <img width={120} height={180} src={item.images[0]} alt=""></img>
-        <div className='itemDown'>
-          <div className='itemDetails'>
-            <p className="title">{item.title}</p>
-            <div>
-              <p className="details">{item.author}</p>
-              <p className="details">{item.price} zł</p>
-            </div>
-          </div>
-          <button onClick={handleClick}>SPRAWDŹ</button>
+      <Link className="bookItem" to={`/${item._id}`}>
+        <div className="bookImgContainer">
+          <img width={240} height={360} src={item.images[0]} alt=""></img>
         </div>
+        <div className="itemDetails">
+          <p className="title">{item.title}</p>
+          <div>
+            <p className="details">{item.author}</p>
+            <p className="details">{item.price} zł</p>
+          </div>
+        </div>
+      </Link>
+      <div className="itemBtn">
+        <button onClick={handleEditBasket}>Dodaj do koszyka</button>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default BookItem
+export default BookItem;

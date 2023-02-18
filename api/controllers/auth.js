@@ -49,7 +49,7 @@ export const login = async (req, res, next) => {
     });
     res
       .cookie("access_token", access_token, {
-        maxAge: 600000,
+        //maxAge: 600000,
         httpOnly: true,
         secure: process.env.ACCESS_TOKEN === "production",
       })

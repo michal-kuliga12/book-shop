@@ -47,7 +47,7 @@ const Home = () => {
                 <>
                   {data.map((item, key) => {
                     return (
-                      <div className="container" key={key}>
+                      <div className="bookItemWrapper" key={key}>
                         <BookItem item={item} />
                       </div>
                     );

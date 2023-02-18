@@ -1,0 +1,109 @@
+@use "../../variables.scss" as v;
+.cartWrapper {
+    min-height: 100vh;
+    padding: 100px 10px;
+
+}
+.cartTableWrapper {
+    width: 100%;
+    padding: 20px;
+    header,
+    .row {
+        font-weight: 300;
+        color: rgb(122, 122, 122);
+        display: flex;
+
+    }
+    header {
+        border-bottom: 1px solid lightgray;
+    }
+    .row {
+        display: flex;
+    }
+    .col {
+        flex: 1;
+        padding: 6px;
+    }
+    .Item {
+        flex: 3;
+        display:flex;
+        gap: 10px;
+        img {
+            width: 64px;
+        }
+        .colItemTitle {
+            font-size: 1rem;
+            font-weight: 400;
+        }
+        .colItemAuthor {
+            font-size: 0.85rem;
+        }
+    }
+    .Price,
+    .Subtotal {
+        p{
+            color: red;
+        }
+    }
+    .Qty {
+        display: flex;
+        gap: 4px;
+        input {
+            width: 50px;
+            height: 30px;
+            padding: 4px;
+            border: 1px solid lightgray;
+            outline: none;
+            border-radius: 4px;
+            text-align: center;
+        }
+    }
+    .Subtotal {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .itemToolbar {
+        width: 100%;
+        display:flex;
+        justify-content: flex-end;
+        gap: 4px;
+        button {
+            width: 26px;
+            height: 26px;
+            background-color: transparent;
+            outline: none;
+            border: 1px solid rgb(236, 236, 236);
+            border-radius: 4px;
+        }
+        button:hover {
+            cursor: pointer;
+            border-color: v.$orange;
+            transition: 0.2s;
+        }
+    }
+}
+.cartTableCheckout {
+    border-top: 1px solid lightgray;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    .applyBtn,
+    .cancelBtn {
+        height: 50px;
+        padding: 10px 6px;;
+        font-size: 1rem;
+    }
+    .applyBtn {
+        background-color: v.$orange-light;
+        border: none;
+        border-radius: 6px;  
+    }
+    .applyBtn:hover {
+        background-color: v.$orange;
+        cursor: pointer;
+    }
+    .applyBtn:active {
+        background-color: v.$orange-dark; 
+    }
+}
