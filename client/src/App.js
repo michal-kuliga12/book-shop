@@ -26,13 +26,12 @@ const router = createBrowserRouter(
 );
 
 const App = () => {
-  const url = "https://book-shop-api.onrender.com/book";
   const userContext = useContext(UserContext);
   useEffect(() => {
     const contextAuthCheck = async () => {
       try {
         const tokenUser = await axios.get(
-          "http://localhost:5000/auth/checkToken/"
+          "https://book-shop-api.onrender.com/auth/checkToken/"
         );
         if (tokenUser) {
           userContext.dispatch({
