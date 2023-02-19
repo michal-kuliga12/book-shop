@@ -13,8 +13,8 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://book-shop-ruddy.vercel.app/",
-      "https://book-shop-git-master-mishiio.vercel.app/",
+      "https://book-shop-ruddy.vercel.app",
+      "https://book-shop-git-master-mishiio.vercel.app",
       "https://book-shop-mishiio.vercel.app",
     ],
     credentials: true,
