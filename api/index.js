@@ -11,7 +11,11 @@ import verifyToken from "./middlewares/verifyToken.js";
 const app = express();
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: [
+      "http://localhost:3000",
+      "book-shop-ruddy.vercel.app",
+      "https://book-shop-mishiio.vercel.app",
+    ],
     credentials: true,
     methods: "*",
   })
