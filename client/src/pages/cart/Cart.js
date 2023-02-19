@@ -15,7 +15,7 @@ import {
 
 const Cart = () => {
   const { data, loading, error } = useFetch(
-    "http://localhost:5000/book/basket/",
+    "https://book-shop-api.onrender.com/book/basket/",
     "get"
   );
   const id = useParams().id;
@@ -23,7 +23,9 @@ const Cart = () => {
   console.log(data);
   const handleDeleteItem = async (itemId) => {
     try {
-      await axios.delete(`http://localhost:5000/book/basket/${itemId}`);
+      await axios.delete(
+        `https://book-shop-api.onrender.com/book/basket/${itemId}`
+      );
     } catch (err) {
       console.log(err);
     }

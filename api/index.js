@@ -13,11 +13,12 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "book-shop-ruddy.vercel.app",
+      "https://book-shop-ruddy.vercel.app/",
+      "https://book-shop-git-master-mishiio.vercel.app/",
       "https://book-shop-mishiio.vercel.app",
     ],
     credentials: true,
-    methods: "*",
+    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
   })
 );
 app.use(cookieParser());

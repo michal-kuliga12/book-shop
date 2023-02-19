@@ -15,7 +15,7 @@ const Home = () => {
   let status = "";
   const { data, loading, error } = useFetch(
     `
-    http://192.168.0.147:5000/book?${
+    https://book-shop-api.onrender.com/book?${
       options.filter ? `${options.filter}=true&` : ``
     }${options.category ? `type=${options.category}` : ``}
     `,
