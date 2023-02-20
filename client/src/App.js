@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -10,7 +10,7 @@ import RootLayout from "./pages/RootLayout.js";
 import Home from "./pages/home/Home.js";
 import Login from "./pages/login/Login";
 import Book from "./pages/book/Book.js";
-import { UserContext, UserContextProvider } from "./context/userContext.js";
+import { UserContext } from "./context/userContext.js";
 import axios from "axios";
 import Cart from "./pages/cart/Cart.js";
 
@@ -26,6 +26,7 @@ const router = createBrowserRouter(
 );
 
 const App = () => {
+  console.log(process.env.URL);
   const userContext = useContext(UserContext);
   useEffect(() => {
     const contextAuthCheck = async () => {
@@ -47,7 +48,11 @@ const App = () => {
           });
         }
       } catch (err) {
-        console.log(err);
+        userContext.dispatch({
+          type: "TOKEN_CHECK",
+          user: null,
+          isLogged: false,
+        });
       }
     };
     contextAuthCheck();

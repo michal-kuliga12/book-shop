@@ -1,0 +1,22 @@
+@use "../../variables.scss" as v;
+.backBtn {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 40px;
+    padding: 4px 10px;
+
+    background-color: v.$orange;
+    border: none;
+    border-radius: 6px;
+    color: white; 
+
+}
+.backBtn:hover {
+    background-color: v.$orange-light;
+    cursor: pointer;
+}
+.backBtn:active {
+    background-color: v.$orange-dark; 
+}

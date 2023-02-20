@@ -1,8 +1,10 @@
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import "./SearchMenu.scss";
 
 const SearchMenu = ({ setOptions, options }) => {
-  const [toggleFilterList, setToggleFilterList] = useState(0);
+  const [toggleCategory, setToggleCategory] = useState(false);
 
   const optionsList = [
     {
@@ -86,63 +88,62 @@ const SearchMenu = ({ setOptions, options }) => {
   ];
   return (
     <section className="searchMenu">
-      <div className="searchOptions">
-        <div className="left">
-          <button
-            className="categoryBtn"
-            onClick={() => {
-              setToggleFilterList(1);
-            }}
-          >
-            Kategoria
-          </button>
-          <button
-            className="filterBtn"
-            onClick={() => {
-              setToggleFilterList(2);
-            }}
-          >
-            Filtry
-          </button>
+      <div className="searchMenuUp">
+        <div
+          className="categoryFilter"
+          onClick={() => {
+            setToggleCategory(!toggleCategory);
+          }}
+        >
+          <i>
+            <FontAwesomeIcon icon={faBars} />
+          </i>
+          KATEGORIA
         </div>
-        <button className="right">Resetuj filtry</button>
+        <div className="optionsFilter">
+          <div className="optionsL">
+            {optionsList.map((option, key) => {
+              return (
+                <span
+                  key={key}
+                  onClick={() => {
+                    setOptions({ ...options, filter: option.dbName });
+                  }}
+                >
+                  {option.name}
+                </span>
+              );
+            })}
+          </div>
+          <span
+            className="optionsR"
+            onClick={() => {
+              setOptions({ category: "", filter: "" });
+            }}
+          >
+            Resetuj filtry
+          </span>
+        </div>
       </div>
       <div
-        className={
-          toggleFilterList === 1 ? "categoryList" : "categoryList disabled"
-        }
-      ></div>
-      <div
-        className={toggleFilterList === 2 ? "tagList" : "tagList disabled"}
-      ></div>
+        className={toggleCategory ? "searchMenuDown_active" : "searchMenuDown"}
+      >
+        {categoryList.map((category, key) => {
+          return (
+            <span
+              key={key}
+              onClick={() => {
+                setOptions({ ...options, category: category.dbName });
+                console.log(options);
+              }}
+            >
+              {category.name}
+            </span>
+          );
+        })}
+      </div>
     </section>
   );
 };
 
-// {categoryList.map((category, key) => {
-//   return (
-//     <span
-//       key={key}
-//       onClick={() => {
-//         setOptions({ ...options, category: category.dbName });
-//         console.log(options);
-//       }}
-//     >
-//       {category.name}
-//     </span>
-//   );
-// })}
-
-// {optionsList.map((option, key) => {
-//   return (
-//     <span
-//       key={key}
-//       onClick={() => {
-//         setOptions({ ...options, filter: option.dbName });
-//       }}
-//     >
-//       {option.name}
-//     </span>
-//   );
-// })}
 export default SearchMenu;

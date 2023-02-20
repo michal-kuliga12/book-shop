@@ -28,6 +28,20 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
+    "plugins": ["unused-imports"],
+    "rules": {
+      "no-unused-vars": "off",
+      "unused-imports/no-unused-imports": "error",
+      "unused-imports/no-unused-vars": [
+        "warn",
+        {
+          "vars": "all",
+          "varsIgnorePattern": "^_",
+          "args": "after-used",
+          "argsIgnorePattern": "^_"
+        }
+      ]
+    },
     "extends": [
       "react-app",
       "react-app/jest"
@@ -44,5 +58,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.3",
+    "eslint-plugin-unused-imports": "^2.0.0"
   }
 }

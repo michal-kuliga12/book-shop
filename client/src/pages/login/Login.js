@@ -24,7 +24,7 @@ const Login = () => {
   const handleLogin = async () => {
     setStatus("loading");
     try {
-      const res = await axios.post(
+      await axios.post(
         "https://book-shop-api.onrender.com/auth/login",
         userData,
         { withCredentials: true }
@@ -53,7 +53,7 @@ const Login = () => {
       return;
     }
     try {
-      const res = await axios.post(
+      await axios.post(
         "https://book-shop-api.onrender.com/auth/register",
         userData
       );

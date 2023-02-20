@@ -29,15 +29,13 @@ const Book = () => {
     };
     checkBookInFav();
   }, []);
-  const { data, loading, error } = useFetch(
+  const { data } = useFetch(
     `https://book-shop-api.onrender.com/book/find/${id}`,
     "get"
   );
   const handleEditBasket = async () => {
     try {
-      const res = await axios.post(
-        `https://book-shop-api.onrender.com/book/basket/${id}`
-      );
+      await axios.post(`https://book-shop-api.onrender.com/book/basket/${id}`);
     } catch (err) {
       console.log(err);
     }
@@ -45,14 +43,10 @@ const Book = () => {
   const handleEditFavorite = async () => {
     try {
       if (!like) {
-        const res = await axios.post(
-          `https://book-shop-api.onrender.com/book/fav/${id}`
-        );
+        await axios.post(`https://book-shop-api.onrender.com/book/fav/${id}`);
         return;
       } else {
-        const res = await axios.delete(
-          `https://book-shop-api.onrender.com/book/fav/${id}`
-        );
+        await axios.delete(`https://book-shop-api.onrender.com/book/fav/${id}`);
         return;
       }
     } catch (err) {

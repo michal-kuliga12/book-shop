@@ -7,49 +7,13 @@
     border-radius: 4px;
     margin-bottom: 10px;
     color: white;
+
     display: flex;
     flex-direction: column;
 }
-.searchOptions {
+.searchMenuUp {
     display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    button {
-        padding: 10px 20px;
-        width: 100%;
-    }
-    .left {
-        display: flex;
-        flex-direction: column;
-        button {
-
-        }
-    }
-    .right {
-
-    }
-}
-.categoryList {
-
-}
-.filterList {
-
-}
-
-
-@media (min-width: 768px) {
-    .searchOptions {
-    flex-direction: row;
-    button {
-        width: 200px;
-    }
-    .left {
-        flex-direction: row;
-    }
-    .right {
-
-    }
-}
+    flex-direction: column-reverse;
 }
 .searchMenuDown {
     display: none;

@@ -1,0 +1,53 @@
+@use "../../variables.scss" as v;
+.stepperWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    padding: 0;
+}
+.stepperItem {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+}
+.stepperItem:before {
+    --size: 50px;
+    content: "";
+    position: relative;
+    top: 60px;
+    z-index: 1;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid lightgray;
+    display: block;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    margin: 1rem auto 0;
+    z-index: 9;
+}
+.inProgress:before {
+    border: 1px solid v.$orange;
+}
+.completed:before {
+    border: none;
+    background-color: v.$orange;
+    color: white;
+}
+.stepperItem:not(:last-child):after {
+    content: "";
+    position: relative;
+    left: 50%;
+    bottom: 80px;
+    height: 3px;
+    background-color: v.$orange;
+    z-index: 8;
+    white-space: nowrap;
+}
+.stepName {
+    height: 26px;
+}
+.stepCounter {
+    z-index: 10;
+}

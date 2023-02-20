@@ -1,6 +1,4 @@
-import axios from "axios";
 import { createContext, useReducer } from "react";
-import { Outlet } from "react-router-dom";
 
 const INITIAL_STATE = {
   user: "",

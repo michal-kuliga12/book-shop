@@ -52,10 +52,12 @@ export const login = async (req, res, next) => {
         //maxAge: 600000,
         httpOnly: true,
         secure: process.env.ACCESS_TOKEN === "production",
+        domain: "onrender.com",
       })
       .cookie("refresh_token", refresh_token, {
         httpOnly: true,
         secure: process.env.REFRESH_TOKEN === "production",
+        domain: "onrender.com",
       })
       .status(200)
       .json({

@@ -1,11 +1,9 @@
 import BookItem from "../../components/BookItem/BookItem.js";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import "./Home.scss";
 import "../../components/BookItem/BookItem.scss";
 import SearchMenu from "../../components/searchMenu/SearchMenu.js";
-import { UserContext } from "../../context/userContext.js";
-import axios from "axios";
 
 const Home = () => {
   const [options, setOptions] = useState({
@@ -27,31 +25,31 @@ const Home = () => {
   return (
     <div className="home">
       <div className="homeSectionsContainer">
-        {/* <section className='banner'>
-        <div className='bannerText'>
-          <p>Witamy wszystkich miłośników książek!</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dignissim turpis purus, nec vulputate nisl ornare in. Suspendisse commodo aliquet mi id imperdiet. Curabitur quis nulla ultricies, congue odio at, feugiat velit. Nam porttitor, arcu ac </p>
-        </div>
-      </section> */}
         <SearchMenu options={options} setOptions={setOptions} />
         <section className="productList">
-          {loading ? (
-            <p className="statusBox">Szukanie...</p>
+          {error ? (
+            <p className="statusBox">Wystąpił błąd!</p>
           ) : (
             <>
-              {status === "noResults" ? (
-                <p className="statusBox">
-                  Nie znaleziono wyników dla zadanych filtrów
-                </p>
+              {loading ? (
+                <p className="statusBox">Szukanie...</p>
               ) : (
                 <>
-                  {data.map((item, key) => {
-                    return (
-                      <div className="bookItemWrapper" key={key}>
-                        <BookItem item={item} />
-                      </div>
-                    );
-                  })}
+                  {status === "noResults" ? (
+                    <p className="statusBox">
+                      Nie znaleziono wyników dla zadanych filtrów
+                    </p>
+                  ) : (
+                    <>
+                      {data.map((item, key) => {
+                        return (
+                          <div className="bookItemWrapper" key={key}>
+                            <BookItem item={item} />
+                          </div>
+                        );
+                      })}
+                    </>
+                  )}
                 </>
               )}
             </>

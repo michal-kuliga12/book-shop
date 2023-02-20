@@ -86,6 +86,9 @@
 .cartTableCheckout {
     border-top: 1px solid lightgray;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
     justify-content: space-between;
     padding: 20px;
     .applyBtn,
@@ -105,5 +108,111 @@
     }
     .applyBtn:active {
         background-color: v.$orange-dark; 
+    }
+}
+.delieveryFormWrapper {
+    display: flex;
+    justify-content: center;
+    form {
+        display: flex;
+        flex-direction: column;
+        max-width: 768px;
+        width: 100%;
+    }
+    label {
+        display: flex;
+        flex-direction: column;
+    }
+    .formItem {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .formItem.Btn {
+        margin-top: 30px;
+        flex-direction: row;
+    }
+    input {
+        padding: 10px 20px;
+        outline: none;
+        border: 1px solid rgb(155, 155, 155);
+        border-radius: 4px;
+        font-size: 14px;
+        width: 100%;
+    }
+    input:focus {
+        border: 1px solid v.$orange;
+    }
+    #backBtn {
+        width: 100px;
+        background-color: white;
+        border: 1px solid rgb(92, 92, 92);
+        border-radius: 4px;
+    }
+    #backBtn:hover {
+        background-color: rgb(233, 233, 233);
+    }
+    #backBtn:active {
+        background-color: rgb(182, 182, 182);
+    }
+    button:hover {
+        cursor: pointer;    
+    }
+    .postalContainer {
+        display: flex;
+        align-items: center;
+        input {
+            flex: 1;
+            text-align: center;
+        }
+        #postal1 {
+            max-width: 30%;
+            min-width: 100px;
+        }
+        #postal2 {
+            min-width: 100px;
+        }
+    }
+}
+
+.submitBtn {
+    padding: 10px 20px;
+    background-color: v.$orange;
+    border:1px solid rgb(238, 238, 238);
+    border-radius: 4px;
+    color: white;
+    width: 200px;
+}
+.submitBtn:hover {
+    background-color: v.$orange-light;
+    cursor: pointer;
+}
+.submitBtn:active {
+    background-color: v.$orange-dark;
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .delieveryFormWrapper {
+        form {
+            width: 600px;
+            gap: 10px;
+        }
+        .formItem {
+            flex-direction: row;
+            justify-content: center;
+            min-width: 100%;
+        }
+        label {
+            width: 100%;
+        }
+    }
+    .postalContainer {
+        justify-content: space-between;
+        input {
+            max-width: 140px;
+        }
     }
 }
