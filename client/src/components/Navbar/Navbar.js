@@ -13,38 +13,38 @@ import "./Navbar.scss";
 const Navbar = () => {
   const userContext = useContext(UserContext);
   const [openMenu, setOpenMenu] = useState(false);
-  const [openSearchBar, setOpenSearchBar] = useState(false);
   return (
     <nav className="navbar">
       <div className="wrapper">
-        {/* <span onClick={()=>{setOpenMenu(!openMenu)}} className={openMenu?'navMenuBtn_active':'navMenuBtn'}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </span> */}
-        <Link className="navLogo" to="/">
-          <i>
-            <FontAwesomeIcon icon={faBookOpen} />
-          </i>
-          <p>
-            <span style={{ color: "#FA824C" }}>Dobra</span>książka.pl
-          </p>
-        </Link>
-        {/* <span className={openSearchBar?'navSearch_active':'navSearch'}>
-              <input type="text" />
-              <i><FontAwesomeIcon icon={faMagnifyingGlass} /></i>
-          </span> */}
-        <div className="navRight">
-          <button
-            className="navSearchBtn"
-            onClick={() => {
-              setOpenSearchBar(!openSearchBar);
-            }}
-          >
+        <div className="navLeft">
+          <Link className="navLogo" to="/">
             <i>
-              <FontAwesomeIcon icon={faMagnifyingGlass} />
+              <FontAwesomeIcon icon={faBookOpen} />
             </i>
-          </button>
+            <p>
+              <span style={{ color: "#FA824C" }}>Dobra</span>książka.pl
+            </p>
+          </Link>
+        </div>
+        <div
+          onClick={() => {
+            setOpenMenu(!openMenu);
+          }}
+          className={`navMenuBtn ${openMenu ? "active" : ""}`}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div className={openMenu ? "navRight_active" : "navRight"}>
+          <div className="navSearch">
+            <input type="text" placeholder="Wyszukaj książkę..." />
+            <button onClick={() => {}}>
+              <i>
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
+              </i>
+            </button>
+          </div>
           <Link to="/login" className="navLogin">
             <i>
               <FontAwesomeIcon icon={faUser} />
@@ -52,10 +52,7 @@ const Navbar = () => {
             {userContext.isLogged ? (
               <div>Witaj {userContext.user}!</div>
             ) : (
-              <div>
-                <span>Witaj! Masz już konto?</span>
-                <span style={{ fontWeight: "bold" }}>Zaloguj się</span>
-              </div>
+              <div>Zaloguj się</div>
             )}
           </Link>
           <Link to="/cart" className="navBasket">

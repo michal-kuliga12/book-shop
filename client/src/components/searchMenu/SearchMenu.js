@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./SearchMenu.scss";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const SearchMenu = ({ setOptions, options }) => {
   const [toggleFilterList, setToggleFilterList] = useState(0);
@@ -10,7 +12,7 @@ const SearchMenu = ({ setOptions, options }) => {
       dbName: "new",
     },
     {
-      name: "Rekomendowane",
+      name: "Polecane",
       dbName: "isFeatured",
     },
     {
@@ -89,60 +91,100 @@ const SearchMenu = ({ setOptions, options }) => {
       <div className="searchOptions">
         <div className="left">
           <button
-            className="categoryBtn"
+            className={`categoryBtn ${toggleFilterList === 1 ? "active" : ""}`}
             onClick={() => {
-              setToggleFilterList(1);
+              if (toggleFilterList !== 1) setToggleFilterList(1);
+              else setToggleFilterList(0);
             }}
           >
             Kategoria
           </button>
           <button
-            className="filterBtn"
+            className="filterBtn disabled"
             onClick={() => {
-              setToggleFilterList(2);
+              if (toggleFilterList !== 2) setToggleFilterList(2);
+              else setToggleFilterList(0);
             }}
           >
             Filtry
           </button>
+          <div
+            className={`filterList overlay ${
+              toggleFilterList === 2 ? "active" : ""
+            }`}
+          >
+            <div className="filterListContent">
+              <h2 className="disabled">Sortuj wg. tagów</h2>
+              {optionsList.map((option, key) => {
+                return (
+                  <span
+                    className={options.filter === option.dbName ? "active" : ""}
+                    key={key}
+                    onClick={() => {
+                      setOptions({ ...options, filter: option.dbName });
+                    }}
+                  >
+                    {option.name}
+                  </span>
+                );
+              })}
+            </div>
+            <button
+              className="filterListCloseBtn disabled"
+              onClick={() => {
+                setToggleFilterList(0);
+              }}
+            >
+              <i>
+                <FontAwesomeIcon icon={faXmark} />
+              </i>
+            </button>
+          </div>
         </div>
-        <button className="right">Resetuj filtry</button>
+        <button
+          onClick={() => {
+            setOptions({ category: "", filter: "" });
+            setToggleFilterList(0);
+          }}
+          className="right"
+        >
+          Resetuj filtry
+        </button>
       </div>
       <div
-        className={
-          toggleFilterList === 1 ? "categoryList" : "categoryList disabled"
-        }
-      ></div>
-      <div
-        className={toggleFilterList === 2 ? "tagList" : "tagList disabled"}
-      ></div>
+        className={`filterList overlay ${
+          toggleFilterList === 1 ? "active" : ""
+        }`}
+      >
+        <div className="filterListContent">
+          <h2 className="disabled">Sortuj wg. kategorii</h2>
+          {categoryList.map((category, key) => {
+            return (
+              <span
+                key={key}
+                onClick={() => {
+                  setOptions({ ...options, category: category.dbName });
+                  console.log(options);
+                }}
+              >
+                {category.name}
+              </span>
+            );
+          })}
+        </div>
+        <button
+          className="filterListCloseBtn disabled"
+          onClick={() => {
+            setToggleFilterList(0);
+          }}
+        >
+          <i>
+            <FontAwesomeIcon icon={faXmark} />
+          </i>
+        </button>
+      </div>
     </section>
   );
 };
 
-// {categoryList.map((category, key) => {
-//   return (
-//     <span
-//       key={key}
-//       onClick={() => {
-//         setOptions({ ...options, category: category.dbName });
-//         console.log(options);
-//       }}
-//     >
-//       {category.name}
-//     </span>
-//   );
-// })}
-
-// {optionsList.map((option, key) => {
-//   return (
-//     <span
-//       key={key}
-//       onClick={() => {
-//         setOptions({ ...options, filter: option.dbName });
-//       }}
-//     >
-//       {option.name}
-//     </span>
-//   );
-// })}
 export default SearchMenu;
