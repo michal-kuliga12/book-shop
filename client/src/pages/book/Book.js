@@ -22,7 +22,7 @@ const Book = () => {
   useEffect(() => {
     const checkBookInFav = async () => {
       const res = await axios.get(
-        `https://book-shop-api.onrender.com/book/findFav/${id}`
+        `${process.env.REACT_APP_API_URL}/book/findFav/${id}`
       );
       if (res.data.favBook) setLike(true);
       else setLike(false);
@@ -30,12 +30,12 @@ const Book = () => {
     checkBookInFav();
   }, []);
   const { data } = useFetch(
-    `https://book-shop-api.onrender.com/book/find/${id}`,
+    `${process.env.REACT_APP_API_URL}/book/find/${id}`,
     "get"
   );
   const handleEditBasket = async () => {
     try {
-      await axios.post(`https://book-shop-api.onrender.com/book/basket/${id}`);
+      await axios.post(`${process.env.REACT_APP_API_URL}/book/basket/${id}`);
     } catch (err) {
       console.log(err);
     }
@@ -43,10 +43,10 @@ const Book = () => {
   const handleEditFavorite = async () => {
     try {
       if (!like) {
-        await axios.post(`https://book-shop-api.onrender.com/book/fav/${id}`);
+        await axios.post(`${process.env.REACT_APP_API_URL}/book/fav/${id}`);
         return;
       } else {
-        await axios.delete(`https://book-shop-api.onrender.com/book/fav/${id}`);
+        await axios.delete(`${process.env.REACT_APP_API_URL}/book/fav/${id}`);
         return;
       }
     } catch (err) {

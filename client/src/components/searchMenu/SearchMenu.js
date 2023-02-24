@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./SearchMenu.scss";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFilterCircleXmark,
+  faList,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
+import { SearchContext } from "../../context/searchContext";
 
 const SearchMenu = ({ setOptions, options }) => {
   const [toggleFilterList, setToggleFilterList] = useState(0);
+  const searchContext = useContext(SearchContext);
 
   const optionsList = [
     {
@@ -97,6 +103,9 @@ const SearchMenu = ({ setOptions, options }) => {
               else setToggleFilterList(0);
             }}
           >
+            <i style={{ fontSize: "20px" }}>
+              <FontAwesomeIcon icon={faList} />
+            </i>
             Kategoria
           </button>
           <button
@@ -118,10 +127,18 @@ const SearchMenu = ({ setOptions, options }) => {
               {optionsList.map((option, key) => {
                 return (
                   <span
-                    className={options.filter === option.dbName ? "active" : ""}
+                    className={
+                      searchContext.filter === option.dbName ? "active" : ""
+                    }
                     key={key}
                     onClick={() => {
-                      setOptions({ ...options, filter: option.dbName });
+                      searchContext.dispatch({
+                        type: "NEW_SEARCH",
+                        search: searchContext.search,
+                        filter: option.dbName,
+                        category: searchContext.category,
+                      });
+                      // setOptions({ ...options, filter: option.dbName });
                     }}
                   >
                     {option.name}
@@ -143,11 +160,17 @@ const SearchMenu = ({ setOptions, options }) => {
         </div>
         <button
           onClick={() => {
-            setOptions({ category: "", filter: "" });
+            searchContext.dispatch({
+              type: "RESET_FILTER",
+            });
+            // setOptions({ category: "", filter: "" });
             setToggleFilterList(0);
           }}
           className="right"
         >
+          <i style={{ fontSize: "20px" }}>
+            <FontAwesomeIcon icon={faFilterCircleXmark} />
+          </i>
           Resetuj filtry
         </button>
       </div>
@@ -163,8 +186,13 @@ const SearchMenu = ({ setOptions, options }) => {
               <span
                 key={key}
                 onClick={() => {
-                  setOptions({ ...options, category: category.dbName });
-                  console.log(options);
+                  searchContext.dispatch({
+                    type: "NEW_SEARCH",
+                    search: searchContext.search,
+                    filter: searchContext.filter,
+                    category: category.dbName,
+                  });
+                  // setOptions({ ...options, category: category.dbName });
                 }}
               >
                 {category.name}

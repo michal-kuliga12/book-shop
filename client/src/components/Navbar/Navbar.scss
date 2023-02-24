@@ -15,6 +15,10 @@
     margin-bottom: 20px;
     box-shadow: 4px 11px 18px -20px rgba(66, 68, 90, 1);
 }
+.navLeft {
+    display: flex;
+    gap: 20px;
+}
 .wrapper {
     z-index: 9;
     display: flex;
@@ -88,7 +92,7 @@
     box-sizing: border-box;
     background-color: rgb(0,0,0);
     background-color: rgba(7, 7, 7, 0.815); 
-    overflow-x: hidden; 
+    overflow-x: hidden;
     transition: 0.5s;
     margin-top: 80px;
     top: 0;
@@ -133,68 +137,10 @@
     }
 }
 .navLogin:hover,
-.navBasket:hover,
-.navSearch:hover button {
+.navBasket:hover {
     color: v.$orange;
     transition: 0.2s;
 }
-
-
-// .navBasket::before {
-//     content:"";
-//     background-color: red;
-//     position: relative;
-//     left: 24px;
-//     top: 8px;
-//     width: 14px;
-//     height: 14px;
-//     border-radius: 50%;
-// }
-// .navLogin,
-// .navBasket,
-// .navSearchBtn {
-//     box-sizing: border-box;
-//     height: 50px;
-//     min-width: 50px;
-//     display: flex;
-//     flex-direction: row;
-//     justify-content: center;
-//     align-items: center;
-//     background: v.$primary;
-//     border: 1px solid v.$orange;
-//     border-radius: 50%;
-
-//     text-decoration: none;
-//     color: black;
-//     transition: 0.2s;
-// }
-// .navLogin:hover,
-// .navBasket:hover,
-// .navSearchBtn:hover {
-//     background: v.$orange;
-//     cursor: pointer;
-//     i {
-//         color: white;
-//     }
-// }
-// .navLogin {
-//     i {
-//         font-size: 28px;
-//     }
-//     div {
-//         display: none
-//     }
-// }
-// .navBasket,
-// .navSearchBtn {
-//     i {
-//         font-size: 24px;
-//     }
-//     p {
-//         display: none;
-//     }
-// }
-
 @media (min-width:420px) {
     .navLogo {
         p {
@@ -210,6 +156,9 @@
 
 }
 @media (min-width: 768px) {
+    .wrapper {
+        justify-content: flex-start;
+    }
     .navbar {
         justify-content: space-between;
         .navSearchBtn.disabled {
@@ -224,33 +173,33 @@
             height: 50px;
             display: flex;
             align-items: stretch;
-            margin-right: 10px;
             input {
                 width: 30vw;
             }
         }
         .navRight,
         .navRight_active {
+            transition: none;
+            width: 100%;
             top:0;
             position:static;
             border: none;
             background-color: transparent;
-            transition: none;
+
 
             margin: 0;
-            width: auto;
             padding: 0;
             height: 100%;
             overflow-x:unset;
 
             display: flex;
             flex-direction: row;
+            justify-content: space-between;
         }
         .navSearch,
         .navSearch.active {
             display: flex;
             flex-direction: row;
-            margin-right: 8vw;
             width: auto;
             align-items: center;
             border: none;
@@ -289,6 +238,10 @@
             button:active { 
                 background-color: rgb(221, 125, 0); 
             }
+        }
+        .navRightLinks {
+            display: flex;
+            gap: 10px;
         }
         .navLogin,
         .navBasket {

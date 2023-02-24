@@ -17,6 +17,10 @@
     .categoryBtn,
     .filterBtn,
     .right {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
         background-color: v.$brown;
         color: white;
         font-size: 14px;

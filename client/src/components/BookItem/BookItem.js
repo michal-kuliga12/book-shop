@@ -7,7 +7,7 @@ const BookItem = ({ item, key }) => {
   const handleEditBasket = async () => {
     try {
       const res = await axios.post(
-        `https://book-shop-api.onrender.com/book/basket/${item._id}`
+        `${process.env.REACT_APP_API_URL}/book/basket/${item._id}`
       );
     } catch (err) {
       console.log(err);

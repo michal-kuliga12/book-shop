@@ -1,0 +1,35 @@
+.adminUserItem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 4px 10px;
+  
+    div {
+        flex: 1;
+    }
+    .userId,
+    .headId {
+        max-width: 50px;
+    }
+}
+.adminUserItem:not(:first-child):hover {
+    cursor:pointer;
+    background-color: rgb(235, 235, 235);
+}
+.adminUserItem > .row {
+    flex: 1;
+}
+.adminUserItem:not(:last-of-type) {
+    border-bottom: 1px solid lightgray;
+}
+@media (max-width: 768px) {.adminUserItem.disabled {display: none;}}
+@media (min-width:768px) {
+    .adminUserItem {
+        flex-direction: row;
+        .userIsAdmin {
+            text-align: right;
+            max-width: 120px;
+        }
+    }
+
+}

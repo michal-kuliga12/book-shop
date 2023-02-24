@@ -25,7 +25,7 @@ const Login = () => {
     setStatus("loading");
     try {
       await axios.post(
-        "https://book-shop-api.onrender.com/auth/login",
+        `${process.env.REACT_APP_API_URL}/auth/login`,
         userData,
         { withCredentials: true }
       );
@@ -54,7 +54,7 @@ const Login = () => {
     }
     try {
       await axios.post(
-        "https://book-shop-api.onrender.com/auth/register",
+        `${process.env.REACT_APP_API_URL}/auth/register`,
         userData
       );
       setStatus("success");

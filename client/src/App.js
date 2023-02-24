@@ -13,6 +13,7 @@ import Book from "./pages/book/Book.js";
 import { UserContext } from "./context/userContext.js";
 import axios from "axios";
 import Cart from "./pages/cart/Cart.js";
+import Admin from "./pages/admin/Admin.js";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,18 +22,18 @@ const router = createBrowserRouter(
       <Route path="/cart" element={<Cart />} />
       <Route path=":id" element={<Book />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/admin" element={<Admin />} />
     </Route>
   )
 );
 
 const App = () => {
-  console.log(process.env.URL);
   const userContext = useContext(UserContext);
   useEffect(() => {
     const contextAuthCheck = async () => {
       try {
         const tokenUser = await axios.get(
-          "https://book-shop-api.onrender.com/auth/checkToken/"
+          `${process.env.REACT_APP_API_URL}/auth/checkToken/`
         );
         if (tokenUser) {
           userContext.dispatch({

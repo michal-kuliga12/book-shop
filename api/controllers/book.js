@@ -49,8 +49,17 @@ export const getBook = async (req, res, next) => {
 };
 //GET ALL BOOKS
 export const getBooks = async (req, res, next) => {
+  if (req.query.title) {
+    const searchQuery = req.query.title;
+    req.query.title = searchQuery.replace(/%20/g, " ");
+  }
+  const regex = new RegExp(req.query.title, "i");
   try {
-    const books = await Book.find(req.query).limit(req.query.limit || 40);
+    const books = await Book.find({
+      title: { $regex: regex },
+      category: req.query.category,
+      filter: req.query.filter,
+    }).limit(req.query.limit || 40);
     res.status(200).json(books);
   } catch {
     next(err);

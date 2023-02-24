@@ -15,13 +15,13 @@ import BackBtn from "../../components/BackBtn/BackBtn.js";
 const Cart = () => {
   const [orderStatus, setOrderStatus] = useState(1);
   const { data, loading, error } = useFetch(
-    "https://book-shop-api.onrender.com/book/basket/",
+    `${process.env.REACT_APP_API_URL}/book/basket/`,
     "get"
   );
   const handleDeleteItem = async (itemId) => {
     try {
       await axios.delete(
-        `https://book-shop-api.onrender.com/book/basket/${itemId}`
+        `${process.env.REACT_APP_API_URL}/book/basket/${itemId}`
       );
     } catch (err) {
       console.log(err);

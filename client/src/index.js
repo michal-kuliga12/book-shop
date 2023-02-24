@@ -5,13 +5,16 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import axios from "axios";
 import { UserContextProvider } from "./context/userContext.js";
+import { SearchContextProvider } from "./context/searchContext.js";
 
 axios.defaults.withCredentials = true;
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <UserContextProvider>
-      <App />
+      <SearchContextProvider>
+        <App />
+      </SearchContextProvider>
     </UserContextProvider>
   </React.StrictMode>
 );
