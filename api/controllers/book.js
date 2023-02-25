@@ -2,6 +2,7 @@ import Book from "../models/Book.js";
 import User from "../models/User.js";
 import createError from "../util/Error.js";
 import mongoose from "mongoose";
+import mongodb from "mongodb";
 
 // ADD BOOK
 export const addBook = async (req, res, next) => {
@@ -120,16 +121,60 @@ export const getBasket = async (req, res, next) => {
   }
 };
 export const addBookToBasket = async (req, res, next) => {
-  const bookId = req.params.id;
-  try {
-    const book = await Book.findById(bookId);
-    const user = await User.findByIdAndUpdate(req.userId, {
-      $push: { basket: book },
-    });
-    res.status(200).json(user.basket);
-  } catch (err) {
-    next(err);
-  }
+  //   const bookId = req.params.id;
+  //   let orderedBook = {
+  //     book: null,
+  //     quantity: null,
+  //     subtotal: null,
+  //   };
+  //   try {
+  //     const foundBook = await Book.findById(bookId);
+  //     const checkBook = await User.find(
+  //       { _id: req.userId },
+  //       { basket: { "book._id": mongoose.Types.ObjectId(bookId) } }
+  //     );
+  //     console.log(checkBook);
+  //     console.log(checkBook.basket.length);
+  //     if (checkBook.basket.length === 0) {
+  //       console.log("if");
+  //       orderedBook = {
+  //         book: foundBook,
+  //         quantity: 1,
+  //         subtotal: foundBook.price,
+  //       };
+  //       const user = await User.findByIdAndUpdate(req.userId, {
+  //         $push: { basket: orderedBook },
+  //       });
+  //     } else {
+  //       console.log("else");
+  //       orderedBook = {
+  //         book: foundBook,
+  //         quantity: checkBook.quantity + 1,
+  //         subtotal: quantity * checkBook.price,
+  //       };
+  //       const searchTest = await User.findAndUpdate(
+  //         { _id: req.userId, basket: { book: { _id: foundBook._id } } },
+  //         {
+  //           $set: {
+  //             "quantity.$.std": orderedBook.quantity,
+  //             "subtotal.$.std": orderedBook.subtotal,
+  //           },
+  //         }
+  //       );
+  //       console.log("test:" + searchTest);
+  //     }
+  //     console.log(orderedBook);
+  //     // if (checkBook) {
+  //     //   const orderedBooks = await User.findByIdAndUpdate(req.userId, {
+  //     //      basket: {book._id: {}},
+  //     //   });
+  //     // } else {
+  //     // }
+  //     res.status(200).json(checkBook.basket);
+  //   } catch (err) {
+  //     console.log(err);
+  //     next(err);
+  //   }
 };
 export const delBookFromBasket = async (req, res, next) => {
   const bookId = req.params.id;

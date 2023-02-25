@@ -9,91 +9,30 @@
 }
 .cartTableWrapper {
     width: 100%;
-    padding: 20px;
-    header,
-    .row {
-        font-weight: 300;
-        color: rgb(122, 122, 122);
-        display: flex;
-
-    }
-    header {
-        border-bottom: 1px solid lightgray;
-    }
-    .row {
-        display: flex;
-    }
-    .col {
-        flex: 1;
-        padding: 6px;
-    }
-    .Item {
-        flex: 3;
-        display:flex;
-        gap: 10px;
-        img {
-            width: 64px;
-        }
-        .colItemTitle {
-            font-size: 1rem;
-            font-weight: 400;
-        }
-        .colItemAuthor {
-            font-size: 0.85rem;
-        }
-    }
-    .Price,
-    .Subtotal {
-        p{
-            color: red;
-        }
-    }
-    .Qty {
-        display: flex;
-        gap: 4px;
-        input {
-            width: 50px;
-            height: 30px;
-            padding: 4px;
-            border: 1px solid lightgray;
-            outline: none;
-            border-radius: 4px;
-            text-align: center;
-        }
-    }
-    .Subtotal {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-    .itemToolbar {
-        width: 100%;
-        display:flex;
-        justify-content: flex-end;
-        gap: 4px;
-        button {
-            width: 26px;
-            height: 26px;
-            background-color: transparent;
-            outline: none;
-            border: 1px solid rgb(236, 236, 236);
-            border-radius: 4px;
-        }
-        button:hover {
-            cursor: pointer;
-            border-color: v.$orange;
-            transition: 0.2s;
-        }
-    }
-}
-.cartTableCheckout {
-    border-top: 1px solid lightgray;
+    padding: 10px;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 10px;
+}
+.statusInfoContainer {
+    display: flex;
     justify-content: center;
-    gap: 20px;
+    align-items: center;
+    background-color: rgb(241, 241, 241);
+    border-radius: 10px;
+    min-height: 100px;
+    width: 100%;
+}
+.orderCheckout {
+    background-color: rgb(240, 240, 240);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     justify-content: space-between;
-    padding: 20px;
+    padding: 10px 74px;
+    div:last-child {
+        align-self: center;
+    }
     .applyBtn,
     .cancelBtn {
         height: 50px;
@@ -148,18 +87,6 @@
     input:focus {
         border: 1px solid v.$orange;
     }
-    #backBtn {
-        width: 100px;
-        background-color: white;
-        border: 1px solid rgb(92, 92, 92);
-        border-radius: 4px;
-    }
-    #backBtn:hover {
-        background-color: rgb(233, 233, 233);
-    }
-    #backBtn:active {
-        background-color: rgb(182, 182, 182);
-    }
     button:hover {
         cursor: pointer;    
     }
@@ -179,7 +106,18 @@
         }
     }
 }
-
+.orderBackBtn {
+    width: 100px;
+    background-color: white;
+    border: 1px solid rgb(92, 92, 92);
+    border-radius: 4px;
+}
+.orderBackBtn:hover {
+    background-color: rgb(233, 233, 233);
+}
+.orderBackBtn:active {
+    background-color: rgb(182, 182, 182);
+}
 .submitBtn {
     padding: 10px 20px;
     background-color: v.$orange;
@@ -196,8 +134,175 @@
     background-color: v.$orange-dark;
     cursor: pointer;
 }
-
+.orderItem {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 10px;
+    padding: 6px 4px;
+    border-bottom: 1px solid lightgray;
+}
+.orderItemL {
+    display: flex;
+    gap: 10px;
+    p:nth-child(1) {
+        font-size: 14px;
+    }
+    p:nth-child(2) {
+        font-size: 14px;
+    }
+    .orderItemInfo {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}
+.orderItemR {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    .orderItemQty {
+        height: 30px;
+        display:flex;
+        input {
+            max-width: 50px;
+            text-align: center;
+            border: 1px solid rgb(207, 207, 207);
+        }
+        i {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            border: 1px solid rgb(207, 207, 207);
+            border-radius: 4px;      
+        }
+        i:hover {
+            cursor: pointer;
+            border-color: v.$orange;
+            transition: 0.2s;
+        }
+    }
+    .orderItemToolbar {
+        display: flex;
+        button {
+            width: 30px;
+            height: 30px;
+            background-color: transparent;
+            outline: none;
+            border: 1px solid rgb(207, 207, 207);
+            border-radius: 4px;
+        }
+        button:hover {
+            cursor: pointer;
+            border-color: v.$orange;
+            transition: 0.2s;
+        }
+    }
+}
+//SECTION 3
+.paymentWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    .formItem {
+        display: flex;
+        justify-content: center;
+        label {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
+.paymentTop {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+}
+.orderPayment {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+    border: 1px solid lightgray;
+    padding: 10px;
+    border-radius: 10px;
+    #cardNumLabel {
+        p {
+            display: block;
+        }
+        div > input {
+            max-width: 60px;
+            height: 30px;
+        }
+    }
+}
+.orderTotalContainer {
+    background-color: rgba(255, 166, 0, 0.164);
+    min-width: 100%;
+    padding: 10px;
+    header {
+        margin-bottom: 10px;
+    }
+    p:nth-child(1) {
+        width: 100%;
+    }
+    p:not(:first-child) {
+        max-width: 70px;
+        text-align: right;
+    }
+    .sumItem {
+        display: flex;
+        justify-content: space-between;
+    }
+    .sumItem:last-child {
+        height: 50px;
+        align-items: center;
+        border-top: 1px solid black;
+    }
+}
+@media (min-width: 500px) {
+    .cartTableWrapper {
+        p {
+            min-width: 100px;
+        }
+        .orderRight p {
+            text-align: center;
+        }
+        .itemToolbar {
+            position: static;
+        }
+        .Subtotal {
+            flex-direction: row;
+            width: 100%;
+        }
+    }
+}
 @media (min-width: 768px) {
+    .cartTableWrapper {
+        header {
+            font-weight: 300;
+            color: rgb(122, 122, 122);
+            display: flex;
+            flex-direction: row;
+        }
+        .row {
+            flex-direction: row;
+        }
+        .itemToolbar {
+            position: static;
+        }
+        .Subtotal {
+            flex-direction: column;
+        }
+        .col {
+            flex: 1;
+        }
+    }
     .delieveryFormWrapper {
         form {
             width: 600px;
@@ -217,5 +322,23 @@
         input {
             max-width: 140px;
         }
+    }
+    .orderItem {
+        flex-direction: row;
+        .orderItemR {
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: end;
+        }
+    }
+    .paymentTop {
+        flex-direction: row;
+        justify-content: center;
+    }
+    .orderTotalContainer {
+        min-width: 300px;
+    }
+    .orderPayment {
+
     }
 }

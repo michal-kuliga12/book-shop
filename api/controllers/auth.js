@@ -49,15 +49,27 @@ export const login = async (req, res, next) => {
     });
     res
       .cookie("access_token", access_token, {
-        //maxAge: 600000,
+        // maxAge: 600000,
         httpOnly: true,
         secure: process.env.ACCESS_TOKEN === "production",
-        domain: "onrender.com",
+        // domain: [
+        //   "onrender.com",
+        //   "render.com",
+        //   "localhost:3000",
+        //   "vercel.com",
+        //   "localhost",
+        // ],
       })
       .cookie("refresh_token", refresh_token, {
         httpOnly: true,
         secure: process.env.REFRESH_TOKEN === "production",
-        domain: "onrender.com",
+        // domain: [
+        //   "onrender.com",
+        //   "render.com",
+        //   "localhost:3000",
+        //   "vercel.com",
+        //   "localhost",
+        // ],
       })
       .status(200)
       .json({

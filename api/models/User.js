@@ -27,7 +27,25 @@ const userSchema = new Schema({
     type: [{}],
   },
   orders: {
-    type: [{}],
+    type: [
+      {
+        // book: {
+        //   type: Object,
+        // },
+        // price: {
+        //   type: Number,
+        // },
+        // quantity: {
+        //   type: Number,
+        // },
+        // subtotal: {
+        //   type: Number,
+        // },
+        // date: {
+        //   type: Date,
+        // },
+      },
+    ],
   },
 });
 

@@ -4,12 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useFetch from "../../hooks/useFetch.js";
 import Stepper from "../../components/Stepper/Stepper.js";
 import "./Cart.scss";
-import {
-  faCheck,
-  faMinus,
-  faPlus,
-  faX,
-} from "@fortawesome/free-solid-svg-icons";
+import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import BackBtn from "../../components/BackBtn/BackBtn.js";
 
 const Cart = () => {
@@ -35,80 +30,82 @@ const Cart = () => {
       {orderStatus === 1 && (
         <>
           <section className="cartTableWrapper">
-            <header>
-              <div className="col Item">PRODUKT</div>
-              <div className="col Price">CENA</div>
-              <div className="col Qty">ILOŚĆ</div>
-              <div className="col Subtotal">WARTOŚĆ</div>
-            </header>
-            {data.map((item, key) => {
-              return (
-                <div className="tableItem">
-                  <div className="row" key={key}>
-                    <div className="col Item">
-                      <img
-                        src={item.images[0]}
-                        width="64px"
-                        alt="www.swiatksiazki.pl"
-                      />
-                      <div>
-                        <p className="colItemTitle">{item.title}</p>
-                        <p className="colItemAuthor">{item.author}</p>
+            {loading ? (
+              <></>
+            ) : (
+              <>
+                {data.length > 0 ? (
+                  <>
+                    <div className="orderItemsContainer">
+                      {data.map((item, key) => {
+                        return (
+                          <div className="orderItem">
+                            <div className="orderItemL">
+                              <img
+                                src={item.images[0]}
+                                width="64px"
+                                alt="www.swiatksiazki.pl"
+                              />
+                              <div className="orderItemInfo">
+                                <div>
+                                  <p>{item.title}</p>
+                                  <p>{item.author}</p>
+                                </div>
+                                <div style={{ color: "red" }}>
+                                  2 x {item.price}
+                                </div>
+                              </div>
+                            </div>
+                            <div className="orderItemR">
+                              <div className="orderItemToolbar">
+                                <button
+                                  onClick={() => {
+                                    handleDeleteItem(item._id);
+                                  }}
+                                >
+                                  <i>
+                                    <FontAwesomeIcon icon={faTrash} />
+                                  </i>
+                                </button>
+                              </div>
+                              <div className="orderItemQty">
+                                <i>
+                                  <FontAwesomeIcon icon={faMinus} />
+                                </i>
+                                <input type="number" min="1" max="99" />
+                                <i>
+                                  <FontAwesomeIcon icon={faPlus} />
+                                </i>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <div className="orderCheckout">
+                      <div className="orderTotal">
+                        <p>Do zapłaty:</p>
+                        <p>CENA</p>
                       </div>
-                    </div>
-                    <div className="col Price">
-                      <p>{item.price} ZŁ</p>
-                    </div>
-                    <div className="col Qty">
-                      <i>
-                        <FontAwesomeIcon icon={faMinus} />
-                      </i>
-                      <input type="number" min="1" max="99" />
-                      <i>
-                        <FontAwesomeIcon icon={faPlus} />
-                      </i>
-                    </div>
-                    <div className="col Subtotal">
                       <div>
-                        <p>2 X {item.price} ZŁ</p>
-                      </div>
-                      <div className="itemToolbar">
-                        <button>
-                          <i>
-                            <FontAwesomeIcon icon={faCheck} />
-                          </i>
-                        </button>
                         <button
+                          className="submitBtn"
                           onClick={() => {
-                            handleDeleteItem(item._id);
+                            setOrderStatus(2);
                           }}
                         >
-                          <i>
-                            <FontAwesomeIcon icon={faX} />
-                          </i>
+                          DALEJ
                         </button>
                       </div>
                     </div>
+                  </>
+                ) : (
+                  <div className="statusInfoContainer">
+                    <p>Brak produktów w koszyku</p>
                   </div>
-                </div>
-              );
-            })}
-          </section>
-          <section className="cartTableCheckout">
-            <div>
-              <button
-                onClick={() => {
-                  setOrderStatus(2);
-                }}
-                className="submitBtn"
-              >
-                DALEJ
-              </button>
-            </div>
-            <div>
-              <p>PODSUMOWANIE:</p>
-              <p>3213 ZŁ</p>
-            </div>
+                )}
+              </>
+            )}
           </section>
         </>
       )}
@@ -167,7 +164,7 @@ const Cart = () => {
             </div>
             <div className="formItem Btn">
               <button
-                id="backBtn"
+                className="orderBackBtn"
                 onClick={() => {
                   setOrderStatus(1);
                 }}
@@ -186,7 +183,67 @@ const Cart = () => {
           </form>
         </section>
       )}
-      {orderStatus === 3 && <section>a</section>}
+      {orderStatus === 3 && (
+        <section className="paymentWrapper">
+          <div className="paymentTop">
+            <form className="orderPayment">
+              <div className="formItem">
+                <label id="cardNumLabel" for="cardNum">
+                  <p>Numer karty </p>
+                  <div>
+                    <input className="cardNum" type="text" disabled />-
+                    <input className="cardNum" type="text" disabled />-
+                    <input className="cardNum" type="text" disabled />-
+                    <input className="cardNum" type="text" disabled />
+                  </div>
+                </label>
+              </div>
+              <div className="formItem">
+                <label for="cvv">
+                  Kod CVV <input id="cardCvv" type="text" disabled />
+                </label>
+              </div>
+            </form>
+            <div className="orderTotalContainer">
+              <header>Podsumowanie</header>
+              <div className="sumItem">
+                <p>Cena:</p>
+                <p>Cena:</p>
+              </div>
+              <div className="sumItem">
+                <p>Dostawa:</p>
+                <p>Dostawa:</p>
+              </div>
+              <div className="sumItem">
+                <p>Zniżka:</p>
+                <p>Zniżka:</p>
+              </div>
+              <div className="sumItem">
+                <p>Łącznie</p>
+                <p></p>
+              </div>
+            </div>
+          </div>
+          <div className="formItem Btn">
+            <button
+              className="orderBackBtn"
+              onClick={() => {
+                setOrderStatus(2);
+              }}
+            >
+              WSTECZ
+            </button>
+            <button
+              className="submitBtn"
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+            >
+              UTWÓRZ ZAMÓWIENIE
+            </button>
+          </div>
+        </section>
+      )}
     </div>
   );
 };
