@@ -170,8 +170,6 @@
         width: 100%;
         height: 100%;
         h3 {
-            padding: 4px;
-            padding-bottom: 14px;
             border-top-right-radius: 10px;
             border-top-left-radius: 10px;
             background-color: rgb(241, 241, 241);
@@ -182,6 +180,30 @@
             background-color: rgb(241, 241, 241);
             border-radius: 0;
             margin-bottom: 10px;
+        }
+        .adminBookItem.delMode,
+        .adminUserItem.delMode {
+            background: red;
+        }
+    }
+    .contentToolbar {
+        padding: 10px;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: rgb(241, 241, 241);
+        button {
+            font-size: 18px;
+            border: none;
+        }
+        button:hover {
+            color: v.$orange;
+            cursor: pointer;
+        }
+        button.delMode {
+            color: v.$orange;
         }
     }
     .contentTable {

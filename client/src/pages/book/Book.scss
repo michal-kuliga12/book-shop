@@ -111,7 +111,12 @@
             background-color: v.$orange;
             color: white;
             border: none;
-
+        }
+        .addToBasketBtn:hover {
+        background-color: v.$orange-light;
+        }
+        .addToBasketBtn:active {
+        background-color: v.$orange-dark;
         }
     }
     .bookButtons_disabled {

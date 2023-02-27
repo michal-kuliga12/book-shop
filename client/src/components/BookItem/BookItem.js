@@ -1,14 +1,23 @@
 import axios from "axios";
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../context/userContext";
 import "./BookItem.scss";
 
 const BookItem = ({ item, key }) => {
+  const userContext = useContext(UserContext);
   const handleEditBasket = async () => {
     try {
-      const res = await axios.post(
+      await axios.post(
         `${process.env.REACT_APP_API_URL}/book/basket/${item._id}`
       );
+      userContext.dispatch({
+        type: "LOGIN",
+        user: userContext.user,
+        isLogged: userContext.isLogged,
+        isAdmin: userContext.isAdmin,
+        basketItems: userContext.basketItems + 1,
+      });
     } catch (err) {
       console.log(err);
     }

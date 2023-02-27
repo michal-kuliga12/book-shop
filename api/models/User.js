@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import basketItemSchema from "./BasketItem.js";
+import orderSchema from "./Order.js";
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
@@ -24,28 +26,10 @@ const userSchema = new Schema({
     type: [{}],
   },
   basket: {
-    type: [{}],
+    type: [basketItemSchema],
   },
   orders: {
-    type: [
-      {
-        // book: {
-        //   type: Object,
-        // },
-        // price: {
-        //   type: Number,
-        // },
-        // quantity: {
-        //   type: Number,
-        // },
-        // subtotal: {
-        //   type: Number,
-        // },
-        // date: {
-        //   type: Date,
-        // },
-      },
-    ],
+    type: [orderSchema],
   },
 });
 

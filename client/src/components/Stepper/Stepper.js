@@ -15,13 +15,18 @@ const Stepper = ({ orderStatus }) => {
         className={`stepperItem ${
           (orderStatus === 1 && "") ||
           (orderStatus === 2 && "inProgress") ||
-          (orderStatus === 3 && "completed")
+          ((orderStatus === 3 || orderStatus === 4) && "completed")
         }`}
       >
         <h3 className="stepCounter">2</h3>
         <p className="stepName">Dane zamówienia</p>
       </li>
-      <li className={`stepperItem ${orderStatus === 3 && "inProgress"}`}>
+      <li
+        className={`stepperItem ${
+          (orderStatus === 3 && "inProgress") ||
+          (orderStatus === 4 && "completed")
+        }`}
+      >
         <h3 className="stepCounter">3</h3>
         <p className="stepName">Podsumowanie i płatność</p>
       </li>

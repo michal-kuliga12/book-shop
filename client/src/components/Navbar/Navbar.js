@@ -90,6 +90,9 @@ const Navbar = () => {
                 <FontAwesomeIcon icon={faCartShopping} />
               </i>
               <p>Koszyk</p>
+              {userContext.basketItems > 0 && (
+                <span>{userContext.basketItems}</span>
+              )}
             </Link>
           </div>
         </div>

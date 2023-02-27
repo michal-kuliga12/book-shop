@@ -3,6 +3,7 @@ import {
   addBook,
   addBookToBasket,
   addBookToFav,
+  addOrder,
   checkBookInFav,
   delBookFromBasket,
   delBookFromFav,
@@ -19,7 +20,7 @@ const router = express.Router();
 
 router.post("/", addBook);
 router.put("/:id", verifyAdmin, updateBook);
-router.delete("/:id", verifyAdmin, deleteBook);
+router.delete("/", verifyToken, deleteBook);
 
 router.get("/find/:id", getBook);
 router.get("/", getBooks);
@@ -31,5 +32,7 @@ router.delete("/fav/:id", verifyToken, delBookFromFav);
 router.get("/basket", verifyToken, getBasket);
 router.post("/basket/:id", verifyToken, addBookToBasket);
 router.delete("/basket/:id", verifyToken, delBookFromBasket);
+//ORDER
+router.post("/order/", verifyToken, addOrder);
 
 export default router;

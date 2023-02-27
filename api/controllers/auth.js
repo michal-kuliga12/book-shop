@@ -89,7 +89,7 @@ export const refreshToken = async (req, res, next) => {
   if (!token) {
     return next(createError(401, "Unauthorized"));
   }
-  console.log(db_token);
+  // console.log(db_token);
   if (!db_token) {
     return next(createError(401, "Unauthorized"));
   }
@@ -114,13 +114,21 @@ export const logout = async (req, res, next) => {
 
 export const checkToken = async (req, res) => {
   const token = req.cookies.access_token;
+  let basketItems = 0;
   if (!token) {
     return res.status(401).json({ user: null });
   }
   try {
     const data = jwt.verify(token, process.env.ACCESS_TOKEN);
     const user = await User.findById(data.id);
-    return res.status(200).json({ user: user.username });
+    user.basket.map((item) => {
+      basketItems += item.quantity;
+    });
+    return res.status(200).json({
+      user: user.username,
+      isAdmin: user.isAdmin,
+      basketItems: basketItems,
+    });
   } catch (err) {
     return res.status(401).json({ user: null });
   }

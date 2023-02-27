@@ -34,6 +34,8 @@ const Login = () => {
         type: "LOGIN",
         user: userData.username,
         isLogged: true,
+        isAdmin: userContext.isAdmin,
+        basketItems: userContext.basketItems,
       });
       setTimeout(() => {
         navigate("/");
@@ -240,21 +242,26 @@ const Login = () => {
               </div>
               <h2>Witaj użytkowniku!</h2>
               <h3>Dlaczego warto założyć konto?</h3>
-              <p>
+              <p className="registerRightInfo">
+                <FontAwesomeIcon icon={faCheck} />
+                możliwość tworzenia zamówień
+              </p>
+              <p className="registerRightInfo">
+                <FontAwesomeIcon icon={faCheck} />
+                dostęp do kodów zniżkowych dla zalogowanych użytkowników
+              </p>
+              <p className="registerRightInfo">
                 <FontAwesomeIcon icon={faCheck} />
                 dostęp do historii zamówień
               </p>
-              <p>
+              <p className="registerRightInfo">
                 <FontAwesomeIcon icon={faCheck} />
-                dostęp do historii zamówień
+                możliwość dodawania ksiażek do listy ulubionych
               </p>
-              <p>
+              <p className="registerRightInfo">
                 <FontAwesomeIcon icon={faCheck} />
-                dostęp do historii zamówień
-              </p>
-              <p>
-                <FontAwesomeIcon icon={faCheck} />
-                dostęp do historii zamówień
+                przekazywanie najnowszych ofert oraz obniżek cen poprzez kontakt
+                mailowy
               </p>
             </div>
           </>

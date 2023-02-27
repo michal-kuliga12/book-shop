@@ -8,7 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { SearchContext } from "../../context/searchContext";
 
-const SearchMenu = ({ setOptions, options }) => {
+const SearchMenu = () => {
   const [toggleFilterList, setToggleFilterList] = useState(0);
   const searchContext = useContext(SearchContext);
 

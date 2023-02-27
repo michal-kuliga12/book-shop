@@ -40,12 +40,16 @@ const App = () => {
             type: "TOKEN_CHECK",
             user: tokenUser.data.user,
             isLogged: true,
+            isAdmin: tokenUser.data.isAdmin,
+            basketItems: tokenUser.data.basketItems,
           });
         } else {
           userContext.dispatch({
             type: "TOKEN_CHECK",
             user: null,
             isLogged: false,
+            isAdmin: false,
+            basketItems: 0,
           });
         }
       } catch (err) {
@@ -53,6 +57,8 @@ const App = () => {
           type: "TOKEN_CHECK",
           user: null,
           isLogged: false,
+          isAdmin: false,
+          basketItems: 0,
         });
       }
     };

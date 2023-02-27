@@ -36,6 +36,13 @@ const Book = () => {
   const handleEditBasket = async () => {
     try {
       await axios.post(`${process.env.REACT_APP_API_URL}/book/basket/${id}`);
+      userContext.dispatch({
+        type: "LOGIN",
+        user: userContext.user,
+        isLogged: userContext.isLogged,
+        isAdmin: userContext.isAdmin,
+        basketItems: userContext.basketItems + 1,
+      });
     } catch (err) {
       console.log(err);
     }
