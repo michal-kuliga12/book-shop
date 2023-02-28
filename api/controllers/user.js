@@ -16,12 +16,13 @@ export const updateUser = async (req, res, next) => {
 };
 // DELETE User
 export const deleteUser = async (req, res, next) => {
-  const id = req.params.id;
+  const idArray = req.body;
   try {
-    const deletedUser = await User.findByIdAndDelete(id);
-    res.status(200).json(deletedUser);
+    const deletedUser = await User.deleteMany({ _id: { $in: idArray } });
+    res.status(200).json({ deletedUser });
   } catch (err) {
     next(err);
+    console.log(err);
   }
 };
 // GET User

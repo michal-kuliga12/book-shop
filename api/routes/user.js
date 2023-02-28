@@ -10,7 +10,7 @@ import verifyToken from "../middlewares/verifyToken.js";
 const router = express.Router();
 
 router.put("/:id", updateUser);
-router.delete("/:id", deleteUser);
+router.delete("/", verifyToken, deleteUser);
 
 router.get("/find", verifyToken, getUser);
 router.get("/", getUsers);

@@ -5,12 +5,14 @@ import mongoose from "mongoose";
 
 // ADD BOOK
 export const addBook = async (req, res, next) => {
+  console.log(req.body.data);
   try {
-    const newBook = new Book(req.body);
+    const newBook = new Book(req.body.data);
     await newBook.save();
     res.status(200).json(newBook);
   } catch (err) {
     next(err);
+    console.log(err);
   }
 };
 // UPDATE BOOK
@@ -30,17 +32,12 @@ export const updateBook = async (req, res, next) => {
 // DELETE BOOK
 export const deleteBook = async (req, res, next) => {
   const idArray = req.body;
-  let deletedArray = [];
-  // await idArray.map((id) => {
-  //   try {
-  //     const deletedBook = Book.findByIdAndDelete(mongoose.Types.ObjectId(id));
-  //     deletedArray.push(deletedBook);
-  //     console.log(deletedArray);
-  //     res.status(200).json(deletedArray);
-  //   } catch (err) {
-  //     next(err);
-  //   }
-  // });
+  try {
+    const deletedBook = await Book.deleteMany({ _id: { $in: idArray } });
+    res.status(200).json({ deletedBook });
+  } catch (err) {
+    next(err);
+  }
 };
 // GET BOOK
 export const getBook = async (req, res, next) => {

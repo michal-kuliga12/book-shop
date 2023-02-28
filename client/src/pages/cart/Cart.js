@@ -116,7 +116,7 @@ const Cart = () => {
                     <div className="orderCheckout">
                       <div className="orderTotal">
                         <p>Do zapłaty:</p>
-                        <p>{data[1]} ZŁ</p>
+                        <p>{data[1].toFixed(2)} ZŁ</p>
                       </div>
                       <div>
                         <button
@@ -309,7 +309,7 @@ const Cart = () => {
               <header>Podsumowanie</header>
               <div className="sumItem">
                 <p>Cena:</p>
-                <p>{order.totalPrice} Zł</p>
+                <p>{order.totalPrice.toFixed(2)} Zł</p>
               </div>
               <div className="sumItem">
                 <p>Dostawa:</p>

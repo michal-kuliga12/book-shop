@@ -168,12 +168,17 @@
         border: 1px solid lightgray;
         border-radius: 10px;
         width: 100%;
-        height: 100%;
         h3 {
             border-top-right-radius: 10px;
             border-top-left-radius: 10px;
             background-color: rgb(241, 241, 241);
             font-size: 18px;
+        }
+        h4 {
+            padding: 10px;
+        }
+        .adminBookItem,.adminUserItem {
+            border-radius: 0;
         }
         .adminBookItem:first-child,
         .adminUserItem:first-child {
@@ -183,7 +188,7 @@
         }
         .adminBookItem.delMode,
         .adminUserItem.delMode {
-            background: red;
+            background: rgba(255, 18, 18, 0.425);
         }
     }
     .contentToolbar {
@@ -209,6 +214,58 @@
     .contentTable {
         display: flex;
         flex-direction: column;
+    }
+    .addBookForm {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        label {
+            display: flex;
+            flex-direction: column;
+            input {
+                height: 30px;
+                outline: none;
+                border: 1px solid rgb(168, 168, 168);
+                border-radius: 2px;
+                padding: 4px 10px;
+            }
+            textarea {
+                padding: 4px 10px;
+            }
+            input:focus,#desc:focus {
+                border-color: v.$orange;
+            }
+            #desc {
+                width: 100%;
+                max-width: 100%;
+                min-width: 100%;
+                min-height: 150px;
+                max-height: 400px;
+                outline: none;
+                border: 1px solid rgb(168, 168, 168);
+                border-radius: 2px;
+            }
+        }
+        div {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .checkBox {
+            flex-direction: row;
+            justify-content: flex-start;
+            :first-child {
+                width: 200px;
+            }
+            :last-child {
+                width: 20px;
+                background-color: v.$orange;
+            }
+            :last-child:checked {
+                background-color: v.$orange;
+            }
+        }
     }
 } 
 @media (min-width: 768px) {
@@ -264,6 +321,14 @@
     .navOptionsBtn {
         display: none;
     }
+    .adminContentWrapper {
+        .addBookForm  {
+            div {
+                justify-content: flex-end;
+            }   
+        }
+    }
+
 }
 @media (min-width:1024px) {
     .admin {

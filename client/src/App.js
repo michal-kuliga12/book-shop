@@ -63,7 +63,7 @@ const App = () => {
       }
     };
     contextAuthCheck();
-  }, []);
+  }, [window.location.pathname]);
   return <RouterProvider router={router} />;
 };
 
