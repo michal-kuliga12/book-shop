@@ -49,9 +49,10 @@ export const login = async (req, res, next) => {
     });
     res
       .cookie("access_token", access_token, {
-        // maxAge: 600000,
+        maxAge: 6000000,
         httpOnly: true,
         secure: process.env.ACCESS_TOKEN === "production",
+        sameSite: "none",
         // domain: [
         //   "onrender.com",
         //   "render.com",
@@ -63,6 +64,7 @@ export const login = async (req, res, next) => {
       .cookie("refresh_token", refresh_token, {
         httpOnly: true,
         secure: process.env.REFRESH_TOKEN === "production",
+        sameSite: "none",
         // domain: [
         //   "onrender.com",
         //   "render.com",
@@ -98,6 +100,7 @@ export const refreshToken = async (req, res, next) => {
     .cookie("access_token", access_token, {
       httpOnly: true,
       secure: process.env.ACCESS_TOKEN === "production",
+      sameSite: "none",
     })
     .status(200)
     .json({ access_token: access_token });
