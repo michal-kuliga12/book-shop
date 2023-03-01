@@ -51,7 +51,8 @@ export const login = async (req, res, next) => {
       .cookie("access_token", access_token, {
         maxAge: 6000000,
         httpOnly: true,
-        secure: process.env.ACCESS_TOKEN === "production",
+        // secure: process.env.ACCESS_TOKEN === "production",
+        secure: true,
         sameSite: "none",
         // domain: [
         //   "onrender.com",
@@ -63,7 +64,8 @@ export const login = async (req, res, next) => {
       })
       .cookie("refresh_token", refresh_token, {
         httpOnly: true,
-        secure: process.env.REFRESH_TOKEN === "production",
+        // secure: process.env.REFRESH_TOKEN === "production",
+        secure: true,
         sameSite: "none",
         // domain: [
         //   "onrender.com",
