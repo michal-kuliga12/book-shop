@@ -7,6 +7,7 @@ import userRoute from "./routes/user.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import verifyToken from "./middlewares/verifyToken.js";
+import session from "express-session";
 
 const app = express();
 app.use(
@@ -21,7 +22,13 @@ app.use(
     methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
   })
 );
+const sessionConfig = {
+  cookie: {
+    sameSite: "none",
+  },
+};
 app.use(cookieParser());
+app.use(session(sessionConfig));
 app.use(express.json());
 app.use(express.static("public"));
 dotenv.config();
