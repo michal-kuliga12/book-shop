@@ -161,12 +161,17 @@ const Navbar = () => {
                 </button>
               </div>
               {userContext.isAdmin && (
-                <Link to="/admin" className="navEl">
+                <div
+                  onClick={() => {
+                    navigate("/admin");
+                  }}
+                  className="navEl"
+                >
                   <i>
                     <FontAwesomeIcon icon={faKey} />
                   </i>
                   <p>Panel admina</p>
-                </Link>
+                </div>
               )}
               <div
                 onClick={() => {
@@ -209,7 +214,7 @@ const Navbar = () => {
                 Aplikacja internetowa umożliwia klientom rejestracje konta w
                 serwisie, które odblokowuje dostęp do tworzenia zamówień w
                 koszyku i dodawania książek do ulubionych. Tworzenie zamówienia
-                przebiega z pominięciem etapu płatności, która nie została
+                przebiega z pominięciem etapu płatności, który nie został
                 zaimplementowana.
               </li>
               <li>

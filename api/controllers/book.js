@@ -2,6 +2,9 @@ import Book from "../models/Book.js";
 import User from "../models/User.js";
 import createError from "../util/Error.js";
 import mongoose from "mongoose";
+import sharp from "sharp";
+import fetch from "node-fetch";
+import fs from "fs";
 
 // ADD BOOK
 export const addBook = async (req, res, next) => {
@@ -44,6 +47,17 @@ export const getBook = async (req, res, next) => {
   const id = req.params.id;
   try {
     const book = await Book.findOne({ _id: id });
+    const url = book.images[0];
+    const image = await fetch(url);
+    const imageBuffer = await image.buffer();
+    if (!fs.existsSync(`public/img/240w/${book._id}.webp`)) {
+      const imageSharp = await sharp(imageBuffer)
+        .resize(240)
+        .toFile(`public/240w/${book._id}.webp`);
+      // console.log("created file");
+    }
+    book.images[1] = `${process.env.SERVER_URL}/240w/${book._id}.webp`;
+    console.log(book.images);
     res.status(200).json(book);
   } catch (err) {
     next(err);
@@ -58,9 +72,22 @@ export const getBooks = async (req, res, next) => {
   const regex = new RegExp(req.query.title, "i");
   req.query.title = { $regex: regex };
   try {
-    const books = await Book.find(req.query).limit(req.query.limit || 40);
-    // console.log(books);
-    res.status(200).json(books);
+    let books = await Book.find(req.query).limit(req.query.limit || 40);
+    const newBooks = books.map(async (book) => {
+      const url = book.images[0];
+      const image = await fetch(url);
+      const imageBuffer = await image.buffer();
+      if (!fs.existsSync(`public/200w/${book._id}.webp`)) {
+        const imageSharp = await sharp(imageBuffer)
+          .resize(200)
+          .toFile(`public/200w/${book._id}.webp`);
+        console.log("created file");
+      }
+      book.images[1] = `${process.env.SERVER_URL}/200w/${book._id}.webp`;
+      return book;
+    });
+    const data = await Promise.all(newBooks);
+    res.status(200).json(data);
   } catch (err) {
     next(err);
   }

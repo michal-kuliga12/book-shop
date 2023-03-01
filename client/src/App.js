@@ -35,6 +35,7 @@ const App = () => {
         const tokenUser = await axios.get(
           `${process.env.REACT_APP_API_URL}/auth/checkToken/`
         );
+        console.log(userContext.isAdmin);
         if (tokenUser) {
           userContext.dispatch({
             type: "TOKEN_CHECK",
@@ -64,6 +65,7 @@ const App = () => {
     };
     contextAuthCheck();
   }, [window.location.pathname]);
+  console.log(userContext);
   return <RouterProvider router={router} />;
 };
 

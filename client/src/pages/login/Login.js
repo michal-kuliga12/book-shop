@@ -30,7 +30,7 @@ const Login = () => {
         { withCredentials: true }
       );
       setStatus("success");
-      userContext.dispatch({
+      await userContext.dispatch({
         type: "LOGIN",
         user: userData.username,
         isLogged: true,

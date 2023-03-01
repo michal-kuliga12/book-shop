@@ -6,6 +6,7 @@ import "./BookItem.scss";
 
 const BookItem = ({ item, key }) => {
   const userContext = useContext(UserContext);
+  // console.log(item.images);
   const handleEditBasket = async () => {
     try {
       await axios.post(
@@ -26,7 +27,7 @@ const BookItem = ({ item, key }) => {
     <>
       <Link className="bookItem" to={`/${item._id}`}>
         <div className="bookImgContainer">
-          <img width={240} height={360} src={item.images[0]} alt=""></img>
+          <img width={240} height={360} src={item.images[1]} alt=""></img>
         </div>
         <div className="itemDetails">
           <p className="title">{item.title}</p>

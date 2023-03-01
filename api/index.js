@@ -23,6 +23,7 @@ app.use(
 );
 app.use(cookieParser());
 app.use(express.json());
+app.use(express.static("public"));
 dotenv.config();
 
 const connectMongo = async () => {

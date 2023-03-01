@@ -3,12 +3,11 @@ import axios from "axios";
 const useFetch = (url, method, body) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   // console.log(url);
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
       try {
         const res = await axios({
           method: method,
@@ -43,6 +42,8 @@ const useFetch = (url, method, body) => {
     }
     setLoading(false);
   };
+  console.log(data);
+  console.log("loaded data");
   return { data, loading, error, reFetch };
 };
 

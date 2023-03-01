@@ -21,6 +21,8 @@
     "jsonwebtoken": "^9.0.0",
     "mongodb": "^5.1.0",
     "mongoose": "^6.8.4",
-    "nodemon": "^2.0.20"
+    "node-fetch": "^3.3.0",
+    "nodemon": "^2.0.20",
+    "sharp": "^0.31.3"
   }
 }
