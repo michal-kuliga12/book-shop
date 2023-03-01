@@ -23,7 +23,7 @@ app.use(
   })
 );
 const sessionConfig = {
-  secret: [`${process.env.ACCESS_TOKEN}`, `${process.env.REFRESH_TOKEN}`],
+  secret: "51948448eff3fcf07f2e8",
   cookie: {
     sameSite: "none",
     secure: true,
