@@ -39,6 +39,9 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       await axios.delete(`${process.env.REACT_APP_API_URL}/auth/logout`);
+      userContext.dispatch({
+        type: "LOGOUT",
+      });
       window.location.reload();
     } catch (err) {
       console.log(err);
