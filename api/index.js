@@ -23,10 +23,16 @@ app.use(
   })
 );
 const sessionConfig = {
+  secret: [`${process.env.ACCESS_TOKEN}`, `${process.env.REFRESH_TOKEN}`],
   cookie: {
     sameSite: "none",
+    secure: true,
   },
 };
+// if (app.get(`${process.env.NODE_ENV}`) === "production") {
+//   app.set("trust proxy", 1); // trust first proxy
+//   sess.cookie.secure = true; // serve secure cookies
+// }
 app.use(cookieParser());
 app.use(session(sessionConfig));
 app.use(express.json());
