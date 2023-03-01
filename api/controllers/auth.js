@@ -111,8 +111,14 @@ export const logout = async (req, res, next) => {
   const db_token = await Token.deleteOne({ token: req.cookies.refresh_token });
   console.log("logout");
   res
-    .clearCookie("access_token")
-    .clearCookie("refresh_token")
+    .clearCookie("access_token", {
+      sameSite: "none",
+      secure: true,
+    })
+    .clearCookie("refresh_token", {
+      sameSite: "none",
+      secure: true,
+    })
     .status(200)
     .json({ db_token })
     .end();
