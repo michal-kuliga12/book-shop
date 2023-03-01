@@ -109,6 +109,7 @@ export const refreshToken = async (req, res, next) => {
 };
 export const logout = async (req, res, next) => {
   const db_token = await Token.deleteOne({ token: req.cookies.refresh_token });
+  console.log("logout");
   res
     .clearCookie("access_token")
     .clearCookie("refresh_token")

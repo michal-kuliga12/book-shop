@@ -42,7 +42,6 @@ const Navbar = () => {
       userContext.dispatch({
         type: "LOGOUT",
       });
-      window.location.reload();
     } catch (err) {
       console.log(err);
     }
