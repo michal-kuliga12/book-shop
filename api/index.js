@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import verifyToken from "./middlewares/verifyToken.js";
 import session from "express-session";
+import generateToken from "./util/GenerateToken.js";
 
 const app = express();
 app.use(

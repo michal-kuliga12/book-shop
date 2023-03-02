@@ -11,6 +11,7 @@ import {
   getBasket,
   getBook,
   getBooks,
+  imgToWebp,
   updateBook,
 } from "../controllers/book.js";
 import verifyToken from "../middlewares/verifyToken.js";
@@ -18,11 +19,12 @@ import verifyAdmin from "../middlewares/verifyAdmin.js";
 
 const router = express.Router();
 
-router.post("/", addBook);
-router.put("/:id", verifyAdmin, updateBook);
-router.delete("/", verifyToken, deleteBook);
+router.post("/", verifyToken, verifyAdmin, addBook);
+router.put("/:id", verifyToken, verifyAdmin, updateBook);
+router.delete("/", verifyToken, verifyAdmin, deleteBook);
 
 router.get("/find/:id", getBook);
+router.get("/imgToWebp", imgToWebp);
 router.get("/", getBooks);
 router.get("/findFav/:id", verifyToken, checkBookInFav);
 //FAVORITE LIST

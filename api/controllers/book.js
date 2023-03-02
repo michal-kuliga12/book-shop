@@ -8,7 +8,7 @@ import fs from "fs";
 
 // ADD BOOK
 export const addBook = async (req, res, next) => {
-  console.log(req.body.data);
+  // console.log(req.body.data);
   try {
     const newBook = new Book(req.body.data);
     await newBook.save();
@@ -42,25 +42,53 @@ export const deleteBook = async (req, res, next) => {
     next(err);
   }
 };
+// JPG TO WEBP CONVERTER
+export const imgToWebp = async (req, res, next) => {
+  try {
+    const books = await Book.find();
+    const newBooks = books.map(async (book) => {
+      try {
+        const url = book.images[0];
+        const image = await fetch(url);
+        const imageBuffer = await image.buffer();
+        // CREATING 200 WIDTH IMAGE
+        if (!fs.existsSync(`public/200w/${book._id}.webp`)) {
+          const imageSharp = await sharp(imageBuffer)
+            .resize(200)
+            .toFile(`public/200w/${book._id}.webp`);
+        }
+        // CREATING 240 WIDTH IMAGE
+        if (!fs.existsSync(`public/240w/${book._id}.webp`)) {
+          const imageSharp = await sharp(imageBuffer)
+            .resize(240)
+            .toFile(`public/240w/${book._id}.webp`);
+        }
+        book.images[1] = `${process.env.SERVER_URL}/200w/${book._id}.webp`;
+        book.images[2] = `${process.env.SERVER_URL}/240w/${book._id}.webp`;
+        book.save();
+        return book;
+      } catch (err) {
+        book.images[1] = `${process.env.SERVER_URL}/200w/no-image.webp`;
+        book.images[2] = `${process.env.SERVER_URL}/240w/no-image.webp`;
+        book.save();
+        return book;
+      }
+    });
+    await Promise.all(newBooks);
+    res.status(200).json(books);
+  } catch (err) {
+    next(err);
+  }
+};
 // GET BOOK
 export const getBook = async (req, res, next) => {
   const id = req.params.id;
   try {
     const book = await Book.findOne({ _id: id });
-    const url = book.images[0];
-    const image = await fetch(url);
-    const imageBuffer = await image.buffer();
-    if (!fs.existsSync(`public/img/240w/${book._id}.webp`)) {
-      const imageSharp = await sharp(imageBuffer)
-        .resize(240)
-        .toFile(`public/240w/${book._id}.webp`);
-      // console.log("created file");
-    }
-    book.images[1] = `${process.env.SERVER_URL}/240w/${book._id}.webp`;
-    console.log(book.images);
     res.status(200).json(book);
   } catch (err) {
     next(err);
+    console.log(err);
   }
 };
 //GET ALL BOOKS
@@ -73,21 +101,7 @@ export const getBooks = async (req, res, next) => {
   req.query.title = { $regex: regex };
   try {
     let books = await Book.find(req.query).limit(req.query.limit || 40);
-    const newBooks = books.map(async (book) => {
-      const url = book.images[0];
-      const image = await fetch(url);
-      const imageBuffer = await image.buffer();
-      if (!fs.existsSync(`public/200w/${book._id}.webp`)) {
-        const imageSharp = await sharp(imageBuffer)
-          .resize(200)
-          .toFile(`public/200w/${book._id}.webp`);
-        console.log("created file");
-      }
-      book.images[1] = `${process.env.SERVER_URL}/200w/${book._id}.webp`;
-      return book;
-    });
-    const data = await Promise.all(newBooks);
-    res.status(200).json(data);
+    res.status(200).json(books);
   } catch (err) {
     next(err);
   }
@@ -221,7 +235,6 @@ export const addBookToBasket = async (req, res, next) => {
 };
 export const delBookFromBasket = async (req, res, next) => {
   const basketItemId = req.params.id;
-  console.log(basketItemId);
   try {
     // const foundBook = await Book.findById(basketItemId);
     const foundUser = await User.findById(req.userId);
@@ -230,7 +243,6 @@ export const delBookFromBasket = async (req, res, next) => {
       const id2 = String(basketItemId);
       return id1 === id2;
     });
-    console.log(filteredBasket);
     if (filteredBasket[0].quantity === 1) {
       const item = foundUser.basket.pull({ _id: basketItemId });
       foundUser.basket = item;
@@ -242,31 +254,6 @@ export const delBookFromBasket = async (req, res, next) => {
       foundUser.basket.push(filteredBasket[0]);
       await foundUser.save();
     }
-
-    // if (filteredBasket.length === 0)
-    //   next(createError(404, "User or book not found"));
-    // if (filteredBasket[0].quantity === 1) {
-    //   console.log("pulling");
-    //   const pulled = await User.findByIdAndUpdate(
-    //     req.userId,
-    //     {
-    //       $pull: {
-    //         basket: { _id: bookId },
-    //       },
-    //     },
-    //     { new: true }
-    //   );
-    //   console.log(pulled);
-    // } else {
-    //   const pulled = await User.findByIdAndUpdate(
-    //     req.userId,
-    //       $set: {
-    //         basket: { : bookId - 1 },
-    //       },
-    //       arrayFilters:
-    //   );
-    //   console.log(pulled);
-    // }
     return res.status(200).json(foundUser.basket);
   } catch (err) {
     next(err);

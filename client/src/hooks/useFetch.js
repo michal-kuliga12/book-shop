@@ -42,8 +42,6 @@ const useFetch = (url, method, body) => {
     }
     setLoading(false);
   };
-  console.log(data);
-  console.log("loaded data");
   return { data, loading, error, reFetch };
 };
 

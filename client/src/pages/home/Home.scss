@@ -13,6 +13,30 @@
     flex-direction: column;
     gap: 10px;
 }
+
+.loadingBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+    i {
+        font-size: 128px;
+        animation: 1.5s infinite fadeInOut;
+    }
+    @keyframes fadeInOut {
+        0% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 0.5;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+}
+
 // .banner{
 //     .bannerText {
 //         min-height: 300px;
@@ -63,4 +87,12 @@
 .statusBox {
     font-size: 18px;
     margin-top: 40px;
+    background-color: rgb(241, 241, 241);
+    border: 1px solid lightgray;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    width: 80vw;
 }

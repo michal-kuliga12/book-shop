@@ -53,7 +53,6 @@ const Admin = () => {
   };
   //DELETE BOOK
   const handleSubmitDelete = async () => {
-    console.log(delArray);
     try {
       await axios.delete(`${process.env.REACT_APP_API_URL}/${collection}/`, {
         data: delArray,
@@ -89,10 +88,7 @@ const Admin = () => {
       domElArray.push(domEl);
     }
     classEdit(domEl);
-    console.log(delArray);
-    console.log(domElArray);
   };
-  console.log(userContext);
   return (
     loading === false && (
       <>

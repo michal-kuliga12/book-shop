@@ -32,11 +32,10 @@ const orderSchema = new Schema({
   },
   addInfo: {
     type: String,
-    required: true,
+    sparse: true,
   },
   orderDate: {
     type: Date,
-    required: true,
   },
 });
 

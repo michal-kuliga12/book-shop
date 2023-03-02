@@ -21,7 +21,6 @@ const Book = () => {
     `${process.env.REACT_APP_API_URL}/book/find/${id}`,
     "get"
   );
-  console.log(loading);
   const [like, setLike] = useState(false);
 
   useEffect(() => {
@@ -83,7 +82,7 @@ const Book = () => {
                   <div className="bookImgAndDetails">
                     <img
                       alt="taniaksiążka.pl"
-                      src={data.images[1]}
+                      src={data.images[2]}
                       width={240}
                     ></img>
                     <div className="bookRight">

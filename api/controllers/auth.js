@@ -49,7 +49,7 @@ export const login = async (req, res, next) => {
     });
     res
       .cookie("access_token", access_token, {
-        maxAge: 6000000,
+        maxAge: 600000,
         httpOnly: true,
         // secure: process.env.ACCESS_TOKEN === "production",
         secure: true,
@@ -93,23 +93,58 @@ export const refreshToken = async (req, res, next) => {
   if (!token) {
     return next(createError(401, "Unauthorized"));
   }
-  // console.log(db_token);
   if (!db_token) {
     return next(createError(401, "Unauthorized"));
   }
   const access_token = generateToken(user);
-  res
-    .cookie("access_token", access_token, {
-      httpOnly: true,
-      secure: process.env.ACCESS_TOKEN === "production",
-      sameSite: "none",
-    })
-    .status(200)
-    .json({ access_token: access_token });
+  return access_token;
+  // res
+  //   .cookie("access_token", access_token, {
+  //     maxAge: 600000,
+  //     httpOnly: true,
+  //     // secure: process.env.ACCESS_TOKEN === "production",
+  //     secure: true,
+  //     sameSite: "none",
+  //   })
+  //   .status(200)
+  //   .json({ access_token: access_token })
+  //   .end();
 };
+
+export const checkToken = async (req, res, next) => {
+  const token = await refreshToken(req, res, next);
+  let basketItems = 0;
+  if (!token) {
+    return res.status(401).json({ user: null });
+  }
+  try {
+    const data = jwt.verify(token, process.env.ACCESS_TOKEN);
+    const user = await User.findById(data.id);
+    user.basket.map((item) => {
+      basketItems += item.quantity;
+    });
+    res
+      .status(200)
+      .cookie("access_token", token, {
+        maxAge: 600000,
+        httpOnly: true,
+        // secure: process.env.ACCESS_TOKEN === "production",
+        secure: true,
+        sameSite: "none",
+      })
+      .json({
+        user: user.username,
+        isAdmin: user.isAdmin,
+        basketItems: basketItems,
+      });
+  } catch (err) {
+    return res.status(401).json({ user: null });
+    console.log(err);
+  }
+};
+
 export const logout = async (req, res, next) => {
   const db_token = await Token.deleteOne({ token: req.cookies.refresh_token });
-  console.log("logout");
   res
     .clearCookie("access_token", {
       sameSite: "none",
@@ -122,26 +157,4 @@ export const logout = async (req, res, next) => {
     .status(200)
     .json({ db_token })
     .end();
-};
-
-export const checkToken = async (req, res) => {
-  const token = req.cookies.access_token;
-  let basketItems = 0;
-  if (!token) {
-    return res.status(401).json({ user: null });
-  }
-  try {
-    const data = jwt.verify(token, process.env.ACCESS_TOKEN);
-    const user = await User.findById(data.id);
-    user.basket.map((item) => {
-      basketItems += item.quantity;
-    });
-    return res.status(200).json({
-      user: user.username,
-      isAdmin: user.isAdmin,
-      basketItems: basketItems,
-    });
-  } catch (err) {
-    return res.status(401).json({ user: null });
-  }
 };

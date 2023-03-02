@@ -1,12 +1,17 @@
 import createError from "../util/Error.js";
 import verifyToken from "./verifyToken.js";
 
-const verifyAdmin = async (req,res,next) => {
-    verifyToken(req,res);
-    if (!req.userisAdmin) {
-        return next(createError(403,'You do not have permissions'))
+const verifyAdmin = async (req, res, next) => {
+  try {
+    // console.log(req.userIsAdmin);
+    if (!req.userIsAdmin) {
+      return next(createError(403, "You do not have permissions"));
     }
-    next()
-}
+    return next();
+  } catch (err) {
+    console.log(err);
+    next(createError(403, "You do not have permissions"));
+  }
+};
 
 export default verifyAdmin;

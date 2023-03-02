@@ -24,12 +24,15 @@ const userSchema = new Schema({
   },
   favorites: {
     type: [{}],
+    sparse: true,
   },
   basket: {
     type: [basketItemSchema],
+    sparse: true,
   },
   orders: {
     type: [orderSchema],
+    sparse: true,
   },
 });
 

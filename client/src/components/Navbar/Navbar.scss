@@ -1,5 +1,7 @@
 @use '../../variables.scss' as v;
-
+.overflowHid {
+    overflow: hidden;
+}
 .navbar {
     position: absolute;
     width: 100%;
@@ -29,12 +31,14 @@
     }
     .hint {
         position: absolute;
+        overflow-y: auto!important;
         top:0;
         left:0;
         width: 100%;
         min-height: 100vh;
+        height: 100%;
         background-color: rgba(0, 0, 0, 0.85);
-        z-index: 100;
+        z-index: 1000;
         padding: 20px 10px;
 
         color: white;
@@ -391,7 +395,7 @@
             position: absolute;
             width: 260px;
             right: 180px;
-            // top: -70px;
+            top: -180px;
             background-color: white;
             border: 1px solid rgb(136, 136, 136);  
             .navEl {

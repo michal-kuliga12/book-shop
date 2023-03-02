@@ -36,6 +36,11 @@ const Navbar = () => {
   const focusProfileMenu = () => {
     htmlElRef.current.focus();
   };
+  if (openMenu || showHint) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "unset";
+  }
   const handleLogout = async () => {
     try {
       await axios.delete(`${process.env.REACT_APP_API_URL}/auth/logout`);
@@ -217,7 +222,7 @@ const Navbar = () => {
                 serwisie, które odblokowuje dostęp do tworzenia zamówień w
                 koszyku i dodawania książek do ulubionych. Tworzenie zamówienia
                 przebiega z pominięciem etapu płatności, który nie został
-                zaimplementowana.
+                zaimplementowany.
               </li>
               <li>
                 Zawartość koszyka, utworzone zamówienia, oraz lista ulubionych

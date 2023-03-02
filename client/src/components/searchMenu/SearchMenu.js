@@ -92,6 +92,13 @@ const SearchMenu = () => {
       dbName: "languages",
     },
   ];
+  if (window.innerWidth < 768) {
+    if (toggleFilterList === 1 || toggleFilterList === 2) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }
   return (
     <section className="searchMenu">
       <div className="searchOptions">

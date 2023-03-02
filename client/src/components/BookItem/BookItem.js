@@ -8,19 +8,25 @@ const BookItem = ({ item, key }) => {
   const userContext = useContext(UserContext);
   // console.log(item.images);
   const handleEditBasket = async () => {
-    try {
-      await axios.post(
-        `${process.env.REACT_APP_API_URL}/book/basket/${item._id}`
+    if (!userContext.isLogged) {
+      window.alert(
+        "Aby uzyskać dostęp do tworzenia zamówienia należy założyć konto "
       );
-      userContext.dispatch({
-        type: "LOGIN",
-        user: userContext.user,
-        isLogged: userContext.isLogged,
-        isAdmin: userContext.isAdmin,
-        basketItems: userContext.basketItems + 1,
-      });
-    } catch (err) {
-      console.log(err);
+    } else {
+      try {
+        await axios.post(
+          `${process.env.REACT_APP_API_URL}/book/basket/${item._id}`
+        );
+        userContext.dispatch({
+          type: "LOGIN",
+          user: userContext.user,
+          isLogged: userContext.isLogged,
+          isAdmin: userContext.isAdmin,
+          basketItems: userContext.basketItems + 1,
+        });
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
   return (
