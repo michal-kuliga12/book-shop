@@ -39,10 +39,7 @@ const sessionConfig = {
 const connectMongo = async () => {
   try {
     console.log(process.env.MONGO_DB);
-    // await mongoose.connect(process.env.MONGO_DB);
-    await mongoose.connect(
-      "mongodb+srv://admin:admin321@cluster0.ghqutte.mongodb.net/book-shop?retryWrites=true&w=majority"
-    );
+    await mongoose.connect(process.env.MONGO_DB);
   } catch (error) {
     console.log(error);
   }
