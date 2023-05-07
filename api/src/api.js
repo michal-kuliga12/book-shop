@@ -12,6 +12,7 @@ import generateToken from "./util/GenerateToken.js";
 import serverless from "serverless-http";
 
 const app = express();
+
 app.use(
   cors({
     origin: [
@@ -35,20 +36,25 @@ const sessionConfig = {
 //   app.set("trust proxy", 1); // trust first proxy
 //   sess.cookie.secure = true; // serve secure cookies
 // }
-app.use(connectMongo());
+const connectMongo = async () => {
+  try {
+    console.log(process.env.MONGO_DB);
+    // await mongoose.connect(process.env.MONGO_DB);
+    await mongoose.connect(
+      "mongodb+srv://admin:admin321@cluster0.ghqutte.mongodb.net/book-shop?retryWrites=true&w=majority"
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+connectMongo();
 app.use(cookieParser());
 app.use(session(sessionConfig));
 app.use(express.json());
 app.use(express.static("public"));
 dotenv.config();
 
-const connectMongo = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_DB);
-  } catch (error) {
-    console.log(error);
-  }
-};
 mongoose.connection.on("connected", () => {
   console.log("connected to Mongo");
 });
