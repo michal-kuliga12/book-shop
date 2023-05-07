@@ -9,6 +9,7 @@ import cors from "cors";
 import verifyToken from "./middlewares/verifyToken.js";
 import session from "express-session";
 import generateToken from "./util/GenerateToken.js";
+import serverless from "serverless-http";
 
 const app = express();
 app.use(
@@ -34,6 +35,7 @@ const sessionConfig = {
 //   app.set("trust proxy", 1); // trust first proxy
 //   sess.cookie.secure = true; // serve secure cookies
 // }
+app.use(connectMongo());
 app.use(cookieParser());
 app.use(session(sessionConfig));
 app.use(express.json());
@@ -71,7 +73,8 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(5000, () => {
-  connectMongo();
-  console.log("app is listening on port 5000...");
-});
+// app.listen(5000, () => {
+//   connectMongo();
+//   console.log("app is listening on port 5000...");
+// });
+export const handler = serverless(app);

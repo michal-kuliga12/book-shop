@@ -2,11 +2,11 @@
   "name": "api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "api.js",
   "type": "module",
   "scripts": {
-    "start": "node index",
-    "dev": "nodemon index",
+    "start": "node api",
+    "dev": "nodemon api",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -22,8 +22,10 @@
     "jsonwebtoken": "^9.0.0",
     "mongodb": "^5.1.0",
     "mongoose": "^6.8.4",
+    "netlify-lambda": "^2.0.16",
     "node-fetch": "^3.3.0",
     "nodemon": "^2.0.20",
+    "serverless-http": "^3.2.0",
     "sharp": "^0.31.3"
   }
 }
