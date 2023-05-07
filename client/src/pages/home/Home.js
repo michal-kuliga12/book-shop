@@ -1,5 +1,5 @@
 import BookItem from "../../components/BookItem/BookItem.js";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import "./Home.scss";
 import "../../components/BookItem/BookItem.scss";
@@ -11,6 +11,7 @@ import axios from "axios";
 
 const Home = () => {
   const searchContext = useContext(SearchContext);
+  const [showServerInfo, setShowServerInfo] = useState(false);
   useEffect(() => {
     const imgConversion = async () => {
       try {
@@ -35,6 +36,11 @@ const Home = () => {
   if (data.length === 0) {
     status = "noResults";
   }
+  if (loading) {
+    setTimeout(() => {
+      setShowServerInfo(true);
+    }, 3000);
+  }
   return (
     <div className="home">
       <div className="homeSectionsContainer">
@@ -47,10 +53,23 @@ const Home = () => {
           ) : (
             <>
               {loading ? (
-                <div className="loadingBox">
-                  <i>
-                    <FontAwesomeIcon icon={faBookOpen} />
-                  </i>
+                <div className="loading__container">
+                  {showServerInfo ? (
+                    <div className="loading__serverInfo">
+                      <p>
+                        Przy przesłaniu pierwszego żądania serwer potrzebuje
+                        czasu, aby się uruchomić. W przypadku braku reakcji
+                        proszę spróbować ponownie za około 1-2 minuty.
+                      </p>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                  <div className="loading__mark">
+                    <i>
+                      <FontAwesomeIcon icon={faBookOpen} />
+                    </i>
+                  </div>
                 </div>
               ) : (
                 <>

@@ -1,171 +1,171 @@
-@use '../../variables.scss' as v;
+@use "../../variables.scss" as v;
 
 .bookWrapper {
-    padding-top: 100px;
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-
+  padding-top: 100px;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
 }
 .bookContainer {
-    max-width: 1024px;
-    border: 1px solid lightgray;
-    // background-color: v.$primary;
-    background-color: white;
-    border-radius: 10px;
-    width: 100%;
-    padding: 10px;
-    gap: 40px;
+  max-width: 1024px;
+  border: 1px solid lightgray;
+  // background-color: v.$primary;
+  background-color: white;
+  border-radius: 10px;
+  width: 100%;
+  padding: 10px;
+  gap: 40px;
+  display: flex;
+  flex-direction: column;
+  transition: 0.2s;
+  animation: fadein 0.5s;
+  -webkit-animation: fadein 0.5s;
+  -moz-animation: fadein 0.5s;
+  -o-animation: fadein 0.5s;
+  -ms-animation: fadein 0.5s;
+
+  @keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  .bookImgAndDetails {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+  }
+  img {
+    margin-bottom: 10px;
+    margin: auto;
+  }
+  .bookRight {
+    flex-basis: 100%;
     display: flex;
     flex-direction: column;
-    transition: 0.2s;
-    animation: fadein 0.5s;
-    -webkit-animation: fadein 0.5s;
-    -moz-animation: fadein 0.5s;
-    -o-animation: fadein 0.5s;
-    -ms-animation: fadein 0.5s;
-    
-    @keyframes fadein {
-        0% {opacity: 0;}
-        100% {opacity: 1;}
+    gap: 30px;
+  }
+  h1 {
+    font-size: 24px;
+    margin-bottom: 4px;
+  }
+  p {
+    font-size: 18px;
+  }
+  .bookDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .tagContainer {
+    display: flex;
+    gap: 4px;
+    .tagItem {
+      display: flex;
+      gap: 4px;
+      padding: 4px 10px;
+      border: 1px solid lightgray;
+      border-radius: 4px;
     }
-    .bookImgAndDetails {
-        display: flex;
-        gap: 20px;
-        flex-direction: column;
+  }
+  .bookInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    p {
+      display: flex;
+      gap: 16px;
+      font-size: 16px;
+      color: rgb(78, 78, 78);
+      span {
+        min-width: 100px;
+      }
     }
-    img {
-        margin-bottom: 10px;
-        margin: auto;
+  }
+  .bookButtons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    button {
+      width: 250px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+
+      background-color: white;
+      border: 1px solid lightgray;
+      border-radius: 4px;
+      i {
+        font-size: 22px;
+      }
     }
-    .bookRight {
-        flex-basis: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
+    button:hover {
+      cursor: pointer;
     }
-    h1 {
-        font-size: 24px;
-        margin-bottom: 4px;
+    .addToFavBtn {
+    }
+    .addToBasketBtn {
+      background-color: v.$orange;
+      color: white;
+      border: none;
+    }
+    .addToBasketBtn:hover {
+      background-color: v.$orange-light;
+    }
+    .addToBasketBtn:active {
+      background-color: v.$orange-dark;
+    }
+  }
+  .bookButtons_disabled {
+    display: flex;
+    p {
+      font-size: 16px;
+      background-color: rgb(255, 245, 190);
+      border-radius: 6px;
+      padding: 10px;
+    }
+  }
+  .bookDesc {
+    border-top: 1px solid lightgray;
+    padding: 10px;
+    h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
     }
     p {
-        font-size: 18px;
+      font-size: 16px;
     }
-    .bookDetails {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-    .tagContainer {
-        display: flex;
-        gap: 4px;
-        .tagItem {
-            display: flex;
-            gap: 4px;
-            padding: 4px 10px;
-            border: 1px solid lightgray;
-            border-radius: 4px;
-    
-        }
-    }
-    .bookInfo {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        p {
-            display: flex;
-            gap: 16px;
-            font-size: 16px;
-            color: rgb(78, 78, 78);
-            span {
-                min-width: 100px;
-            }
-        }
-    }
-    .bookButtons {
-        display: flex;
-        justify-content: flex-end;
-        gap: 16px;
-        button {
-            width: 250px;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-
-            background-color: white;
-            border: 1px solid lightgray;
-            border-radius: 4px;
-            i {
-                font-size: 22px;
-            }
-        }
-        button:hover {
-            cursor: pointer;
-        }
-        .addToFavBtn {
-        }
-        .addToBasketBtn {
-            background-color: v.$orange;
-            color: white;
-            border: none;
-        }
-        .addToBasketBtn:hover {
-        background-color: v.$orange-light;
-        }
-        .addToBasketBtn:active {
-        background-color: v.$orange-dark;
-        }
-    }
-    .bookButtons_disabled {
-        display: flex;
-        p {
-            font-size: 16px;
-            background-color: rgb(255, 245, 190);
-            border-radius: 6px;
-            padding: 10px;
-        }
-        
-    }
-    .bookDesc {
-        border-top: 1px solid lightgray;
-        padding: 10px;
-        h2 {
-            font-size: 22px;
-            margin-bottom: 20px;
-        }
-        p {
-            font-size: 16px;
-        }
-    }
+  }
 }
 @media (min-width: 768px) {
-    .bookContainer {
-        padding: 20px;
-        .bookImgAndDetails {
-            flex-direction: row;
-            gap: 40px;
-        }
-        img {
-            margin: 0;
-        }
+  .bookContainer {
+    padding: 20px;
+    .bookImgAndDetails {
+      flex-direction: row;
+      gap: 40px;
     }
-    .bookButtons_disabled {
-        justify-content: flex-end;
-        p {
-            width: 240px;
-        }
+    img {
+      margin: 0;
     }
-    .bookButtons {
-        flex-direction: column;
-        align-items: flex-end;
-        button {
-            font-size: 16px;
-            justify-content: flex-start!important;
-            padding: 0 10px;
-        }
+  }
+  .bookButtons_disabled {
+    justify-content: flex-end;
+    p {
+      width: 240px;
     }
-
+  }
+  .bookButtons {
+    flex-direction: column;
+    align-items: flex-end;
+    button {
+      font-size: 16px;
+      justify-content: flex-start !important;
+      padding: 0 10px;
+    }
+  }
 }
